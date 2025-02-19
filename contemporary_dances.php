@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Include the navbar (which already contains session_start())
 include('navbar.php');
 ?>

@@ -84,7 +84,7 @@ include('navbar.php');
 </head>
 
 <body>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+<div class="modal fade" role="dialog" id="modal-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

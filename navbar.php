@@ -52,7 +52,7 @@
 
                 <?php if (isset($_SESSION['username'])): ?>
                     <li class="nav-item">
-                        <div class="nav-item dropdown show"><a class="dropdown-toggle" aria-expanded="true" data-bs-toggle="dropdown" href="#"><?php echo $_SESSION['username'] ?></a>
+                        <div class="nav-item dropdown show"><a class="dropdown-toggle dropdown_styling" aria-expanded="true" data-bs-toggle="dropdown" href="#"><?php echo $_SESSION['username'] ?></a>
                             <div class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
                                 <a class="dropdown-item" href="user_settings.php">User Settings</a>
                                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>

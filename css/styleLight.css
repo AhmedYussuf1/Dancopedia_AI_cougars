@@ -63,6 +63,10 @@ nav.navbar .navbar-nav .nav-item .nav-link {
 
 /* Change appearance on hover */
 
+.dropdown_styling{
+    text-decoration: none;
+    color: white;
+}
 
 /* Dropdown menu styling */
 .dropdown-menu {

@@ -87,6 +87,11 @@ nav.navbar .nav-item {
     padding: 10px 15px;
 }
 
+.dropdown_styling{
+    text-decoration: none;
+    color: white;
+}
+
 .dropdown-item:hover {
     background-color: #e2e6ea; /* Slightly darker background on hover */
     font-weight: bold; /* Make text bold on hover */

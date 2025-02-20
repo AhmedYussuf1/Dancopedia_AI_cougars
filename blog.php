@@ -188,56 +188,17 @@ function getTheme() {
     <title>Blog</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php
+    $setTheme = getTheme();
+    if($setTheme == 1){
+        echo ' <link href="styleLight.css" rel="stylesheet"> ';
+    }
+    elseif ($setTheme == 2){
+        echo ' <link href="styleDark.css" rel="stylesheet"> ';
+    }
+    ?>
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .post {
-            background: #fff;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        .post-title {
-            font-size: 22px;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .post-content {
-            margin-bottom: 10px;
-        }
-        .post-image {
-            max-width: 100%; /* Make sure image is responsive */
-            height: auto;
-            margin-top: 15px;
-            border-radius: 8px;
-        }
         /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 8px;
-        }
         .close {
             color: #aaa;
             float: right;

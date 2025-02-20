@@ -46,10 +46,10 @@ function getTheme() {
     <?php
     $setTheme = getTheme();
     if($setTheme == 1){
-        echo ' <link href="styleLight.css" rel="stylesheet"> ';
+        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
     }
     elseif ($setTheme == 2){
-        echo ' <link href="styleDark.css" rel="stylesheet"> ';
+        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
     }
     ?>
 </head>

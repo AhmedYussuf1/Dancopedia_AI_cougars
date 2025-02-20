@@ -258,6 +258,27 @@ footer {
     border-radius: 8px;
 }
 
+/* Video gallery styling */
+.video-container {
+    padding: 10px;
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
 .text-muted{
     color: white;
+}
+
+.btn-light{
+    color: black;
+}
+
+.feedback-box {
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
 }

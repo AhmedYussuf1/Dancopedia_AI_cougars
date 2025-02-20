@@ -249,3 +249,21 @@ footer {
     max-width: 600px;
     border-radius: 8px;
 }
+
+/* Video gallery styling */
+.video-container {
+    padding: 10px;
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.feedback-box {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}

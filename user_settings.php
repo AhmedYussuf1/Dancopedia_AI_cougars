@@ -38,13 +38,20 @@ function isSelected($optionValue, $theme) {
     return $optionValue == $theme ? 'selected' : '';
 }
 
-function getTheme(){
-    if (isset($_SESSION['username'])){
+function getTheme() {
+    global $conn;  // Access the global $conn variable
+    if (isset($_SESSION['username'])) {
         $user_id = $_SESSION['user_id'];
-        return "SELECT theme FROM user_settings WHERE user_id = $user_id";
-    }
-    else{
-        return 1;
+        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
+        $themeResult = $conn->query($themeQuery);
+        if ($themeResult->num_rows > 0) {
+            $row = $themeResult->fetch_assoc();
+            return $row['theme'];
+        } else {
+            return 1;  // Default theme if no result found
+        }
+    } else {
+        return 1;  // Default theme if user not logged in
     }
 }
 

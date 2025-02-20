@@ -61,6 +61,14 @@ nav.navbar .navbar-nav .nav-item .nav-link {
     font-weight: bold;
 }
 
+.table-striped>tbody>tr:nth-of-type(odd)>*{
+    color: white;
+}
+
+.table>:not(caption)>*>*{
+    color: white;
+}
+
 /* Change appearance on hover */
 
 

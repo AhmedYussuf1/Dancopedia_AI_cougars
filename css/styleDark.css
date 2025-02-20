@@ -48,6 +48,12 @@ nav.navbar .navbar-brand {
 /* Ensure no wrapping of navbar items */
 nav.navbar .navbar-nav .nav-item .nav-link {
     white-space: nowrap; /* Prevent text from breaking onto new lines */
+    color: white;
+
+}
+
+nav.navbar .nav-item {
+    text-decoration: none;
 }
 
 .navbar .dropdown {
@@ -146,11 +152,11 @@ footer {
     right: 20px;
     width: 350px;
     height: 450px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: #27282b;
+    border: 1px solid #000000;
     border-radius: 10px;
     display: none; /* Hidden by default */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.6);
     z-index: 9999;
     padding: 20px;
     overflow-y: auto;

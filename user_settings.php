@@ -84,13 +84,24 @@ include('navbar.php');
 </head>
 
 <body>
+<?php
+if(isset($_POST['account_delete_button'])) {
+    $user_id = $_SESSION['user_id'];
+    echo '<script> console.log("Tried to Delete USer"); </script>';
+    $stmt = $conn->prepare("DELETE FROM users WHERE user_id = $user_id");
+    $stmt->execute();
+}
+?>
 <div class="modal fade" role="dialog" id="modal-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Confirm Account Delete</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body"><button class="btn btn-danger" type="button">Confirm Account Delete</button></div>
+            <form method="post">
+                <div class="modal-body"><button class="btn btn-danger" type="submit" id="account_delete_button">Confirm Account Delete</button></div>
+            </form>
+
             <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
         </div>
     </div>

@@ -98,6 +98,11 @@ $conn->close();
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 
+    <!-- Forgot Password Link -->
+    <div class="mt-3 text-center">
+        <a href="forgot_password.php" class="btn btn-link">Forgot Password?</a>
+    </div>
+
     <!-- Register Button -->
     <div class="mt-3 text-center">
         <a href="register.php" class="btn btn-secondary">Register</a>

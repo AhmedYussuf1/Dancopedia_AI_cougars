@@ -37,6 +37,17 @@ function isChecked($id, $checkbox_states) {
 function isSelected($optionValue, $theme) {
     return $optionValue == $theme ? 'selected' : '';
 }
+
+function getTheme(){
+    if (isset($_SESSION['username'])){
+        $user_id = $_SESSION['user_id'];
+        return "SELECT theme FROM user_settings WHERE user_id = $user_id";
+    }
+    else{
+        return 1;
+    }
+}
+
 // Include the navbar (which already contains session_start())
 include('navbar.php');
 ?>
@@ -54,8 +65,15 @@ include('navbar.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-    </style>
+    <?php
+    $setTheme = getTheme();
+    if($setTheme == 1){
+        echo ' <link href="styleLight.css" rel="stylesheet"> ';
+    }
+    elseif ($setTheme == 2){
+        echo ' <link href="styleDark.css" rel="stylesheet"> ';
+    }
+    ?>
 </head>
 
 <body>

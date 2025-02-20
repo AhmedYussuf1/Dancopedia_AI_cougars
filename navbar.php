@@ -1,6 +1,5 @@
 <!-- Favicon -->
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -50,9 +49,9 @@
                             <div class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
                                 <a class="dropdown-item" href="user_settings.php">User Settings</a>
                                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                    <li class="nav-item">
-                                        <a class="dropdown-item <?php echo basename($_SERVER['PHP_SELF']) == 'admin_dashboard.php' ? 'active' : ''; ?>" href="admin_dashboard.php">Admin</a>
-                                    </li>
+                                    <div class="nav-item" style="margin: 0">
+                                        <a class="dropdown-item <?php echo basename($_SERVER['PHP_SELF']) == 'admin_dashboard.php' ? 'active' : ''; ?>" href="admin_dashboard.php">Admin Dashboard</a>
+                                    </div>
                                 <?php endif; ?>
                                 <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>

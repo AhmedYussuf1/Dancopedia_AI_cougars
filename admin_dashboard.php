@@ -16,24 +16,6 @@ $dancesQuery = $conn->query("SELECT * FROM dances");
 
 // Fetch users data
 $usersQuery = $conn->query("SELECT * FROM users");
-
-function getTheme() {
-    global $conn;  // Access the global $conn variable
-    if (isset($_SESSION['username'])) {
-        $user_id = $_SESSION['user_id'];
-        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
-        $themeResult = $conn->query($themeQuery);
-        if ($themeResult->num_rows > 0) {
-            $row = $themeResult->fetch_assoc();
-            return $row['theme'];
-        } else {
-            return 1;  // Default theme if no result found
-        }
-    } else {
-        return 1;  // Default theme if user not logged in
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -43,15 +25,6 @@ function getTheme() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <?php
-    $setTheme = getTheme();
-    if($setTheme == 1){
-        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
-    }
-    elseif ($setTheme == 2){
-        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
-    }
-    ?>
 </head>
 <body>
 
@@ -91,6 +64,10 @@ function getTheme() {
 
         <!-- Dances Section -->
         <h2>Dances</h2>
+        
+        <!-- Add Dance Button -->
+        <a href="add_dance.php" class="btn btn-success mb-3">Add New Dance</a>
+        
         <table class="table table-striped">
             <thead>
                 <tr>

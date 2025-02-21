@@ -87,6 +87,13 @@ nav.navbar .nav-item {
     padding: 10px 15px;
 }
 
+.card{
+    --bs-card-bg:none;
+    background-color: #252323;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    border: none;
+}
+
 .dropdown_styling{
     text-decoration: none;
     color: white;

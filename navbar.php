@@ -19,7 +19,7 @@
 
                 <li class="nav-item">
                     <!-- the extension should be .php  -->
-                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'interactive_map.html' ? 'active' : ''; ?>" href="interactive_map.php">Interactive Map</a>
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'interactive_map.php' ? 'active' : ''; ?>" href="interactive_map.php">Interactive Map</a>
 </
                 <!-- Home Link -->
                 <li class="nav-item">

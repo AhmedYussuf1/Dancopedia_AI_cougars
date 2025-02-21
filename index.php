@@ -20,6 +20,22 @@ if ($conn->connect_error) {
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
 $result = $conn->query($sql);
+function getTheme() {
+    global $conn;  // Access the global $conn variable
+    if (isset($_SESSION['username'])) {
+        $user_id = $_SESSION['user_id'];
+        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
+        $themeResult = $conn->query($themeQuery);
+        if ($themeResult->num_rows > 0) {
+            $row = $themeResult->fetch_assoc();
+            return $row['theme'];
+        } else {
+            return 1;  // Default theme if no result found
+        }
+    } else {
+        return 1;  // Default theme if user not logged in
+    }
+}
 ?>
 
 <!-- Add Favicon -->
@@ -35,6 +51,16 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <?php
+        $setTheme = getTheme();
+        if($setTheme == 1){
+            echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
+        }
+        elseif ($setTheme == 2){
+            echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
+        }
+    ?>
+    
     <link rel="stylesheet" href="./css/index.css">
     
 </head>
@@ -198,4 +224,6 @@ $result = $conn->query($sql);
     </script>
 
 </body>
+<?php
+$conn->close();
 </html>

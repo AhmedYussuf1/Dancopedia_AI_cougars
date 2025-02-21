@@ -18,6 +18,7 @@
                 <!-- link to interactive_map.html -->
 
                 <li class="nav-item">
+                    <!-- the extension should be .php  -->
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'interactive_map.html' ? 'active' : ''; ?>" href="interactive_map.php">Interactive Map</a>
 </
                 <!-- Home Link -->

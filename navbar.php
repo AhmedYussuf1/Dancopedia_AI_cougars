@@ -1,5 +1,6 @@
 <!-- Favicon -->
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
 <link rel="stylesheet" href="css/navbar.css">
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -38,10 +39,6 @@
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'blog.php' ? 'active' : ''; ?>" href="blog.php">Blog</a>
                 </li>
-                <li class="nav-item">
-    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'feedback.php' ? 'active' : ''; ?>" href="feedback.php">Feedback</a>
-</li>
-
 
                 <!-- Feedback Link (always visible) -->
                 <li class="nav-item">
@@ -55,13 +52,13 @@
 
                 <?php if (isset($_SESSION['username'])): ?>
                     <li class="nav-item">
-                        <div class="nav-item dropdown show"><a class="dropdown-toggle" aria-expanded="true" data-bs-toggle="dropdown" href="#"><?php echo $_SESSION['username'] ?></a>
+                        <div class="nav-item dropdown show"><a class="dropdown-toggle dropdown_styling" aria-expanded="true" data-bs-toggle="dropdown" href="#"><?php echo $_SESSION['username'] ?></a>
                             <div class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
                                 <a class="dropdown-item" href="user_settings.php">User Settings</a>
                                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                    <li class="nav-item">
-                                        <a class="dropdown-item <?php echo basename($_SERVER['PHP_SELF']) == 'admin_dashboard.php' ? 'active' : ''; ?>" href="admin_dashboard.php">Admin</a>
-                                    </li>
+                                    <div class="nav-item" style="margin: 0">
+                                        <a class="dropdown-item <?php echo basename($_SERVER['PHP_SELF']) == 'admin_dashboard.php' ? 'active' : ''; ?>" href="admin_dashboard.php">Admin Dashboard</a>
+                                    </div>
                                 <?php endif; ?>
                                 <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>
@@ -106,4 +103,5 @@ function searchDances() {
     }
 }
 </script>
+
 

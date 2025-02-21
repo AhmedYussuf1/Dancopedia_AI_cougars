@@ -1,4 +1,48 @@
 <?php
+session_start(); // Start the session to track user login status
+
+// Database connection
+include('db_connection.php');
+
+// Fetch the user settings
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT theme, email_blog, email_events, email_dance FROM user_settings WHERE user_id = $user_id";
+$result = $conn->query($sql);
+
+$checkbox_states = [];
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $theme = $row['theme'];
+    $checkbox_states['BlogCheck'] = $row['email_blog'];
+    $checkbox_states['EventsCheck'] = $row['email_events'];
+    $checkbox_states['DanceCheck'] = $row['email_dance'];
+}
+
+function isChecked($id, $checkbox_states) {
+    return isset($checkbox_states[$id]) && $checkbox_states[$id] ? 'checked' : '';
+}
+
+function isSelected($optionValue, $theme) {
+    return $optionValue == $theme ? 'selected' : '';
+}
+
+function getTheme() {
+    global $conn;  // Access the global $conn variable
+    if (isset($_SESSION['username'])) {
+        $user_id = $_SESSION['user_id'];
+        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
+        $themeResult = $conn->query($themeQuery);
+        if ($themeResult->num_rows > 0) {
+            $row = $themeResult->fetch_assoc();
+            return $row['theme'];
+        } else {
+            return 1;  // Default theme if no result found
+        }
+    } else {
+        return 1;  // Default theme if user not logged in
+    }
+}
+
 // Include the navbar (which already contains session_start())
 include('navbar.php');
 ?>
@@ -16,18 +60,36 @@ include('navbar.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-    </style>
+    <?php
+    $setTheme = getTheme();
+    if($setTheme == 1){
+        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
+    }
+    elseif ($setTheme == 2){
+        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
+    }
+    ?>
 </head>
 
 <body>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+<?php
+if(isset($_POST['account_delete_button'])) {
+    $user_id = $_SESSION['user_id'];
+    echo '<script> console.log("Tried to Delete USer"); </script>';
+    $stmt = $conn->prepare("DELETE FROM users WHERE user_id = $user_id");
+    $stmt->execute();
+}
+?>
+<div class="modal fade" role="dialog" id="modal-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Confirm Account Delete</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body"><button class="btn btn-danger" type="button">Confirm Account Delete</button></div>
+            <form method="post">
+                <div class="modal-body"><button class="btn btn-danger" type="submit" id="account_delete_button">Confirm Account Delete</button></div>
+            </form>
+
             <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
         </div>
     </div>
@@ -39,18 +101,18 @@ include('navbar.php');
     <div class="container mt-4 mb-4">
         <h2 style="text-shadow: 1px 1px;">Website Theme Preference</h2><select class="form-select" style="width: 200px;">
             <optgroup label="Themes">
-                <option value="1" selected="">Light</option>
-                <option value="2">Dark</option>
-                <option value="3">Green</option>
-                <option value="4">Blue</option>
+                <option value="1" <?php echo isSelected(1, $theme); ?>>Light</option>
+                <option value="2" <?php echo isSelected(2, $theme); ?>>Dark</option>
+                <option value="3" <?php echo isSelected(3, $theme); ?>>Green</option>
+                <option value="4" <?php echo isSelected(4, $theme); ?>>Blue</option>
             </optgroup>
         </select>
     </div>
     <div class="container mt-4 mb-4">
         <h2 style="text-shadow: 1px 1px;">Email Preferences</h2>
-        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Blog Posts</label></div>
-        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Events</label></div>
-        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">New Dances</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" id="BlogCheck" <?php echo isChecked('BlogCheck', $checkbox_states); ?>><label class="form-check-label" for="BlogCheck">Blog Posts</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" id="EventsCheck" <?php echo isChecked('EventsCheck', $checkbox_states); ?>><label class="form-check-label" for="EventsCheck">Events</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" id="DanceCheck" <?php echo isChecked('DanceCheck', $checkbox_states); ?>><label class="form-check-label" for="DanceCheck">New Dances</label></div>
     </div>
     <div class="container mt-4 mb-4">
         <h2 style="text-shadow: 1px 1px;">Account Settings</h2>

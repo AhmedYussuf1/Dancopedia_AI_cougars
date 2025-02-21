@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Include the navbar (which already contains session_start())
 include('navbar.php');
 ?>
@@ -11,9 +12,7 @@ include('navbar.php');
     <title>Classical Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Your custom styles go here */
-    </style>
+    <link href="css/styleLight.css" rel="stylesheet">
 </head>
 <body>
 

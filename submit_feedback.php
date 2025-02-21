@@ -5,7 +5,7 @@ session_start();
 // Database connection
 $servername = "localhost";
 $username = "root";  // Your MySQL username
-$password = "";      // Your MySQL password
+$password = "ics311";  // Your MySQL password
 $dbname = "dance_ai_db";  // Your MySQL database name
 $port = 3307; // MySQL default port, change if needed
 
@@ -17,10 +17,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Define the getTheme function
 function getTheme() {
     global $conn;  // Access the global $conn variable
     if (isset($_SESSION['username'])) {
         $user_id = $_SESSION['user_id'];
+        
+        // Check if the user is an admin, force light theme
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+            return 1;  // Admin always gets the light theme
+        }
+
+        // Get the user's saved theme if not an admin
         $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
         $themeResult = $conn->query($themeQuery);
         if ($themeResult->num_rows > 0) {
@@ -34,7 +42,58 @@ function getTheme() {
     }
 }
 
+// Initialize the success flag
+$feedbackSubmitted = false;
+
+// Check if the form was submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    // Handle the image upload if present
+    $image = null;
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        // Define the directory to store images
+        $targetDir = "uploads/";
+        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        // Check if the file is an image
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if ($check !== false) {
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $image = $targetFile; // Save the image path to the database
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            echo "File is not an image.";
+        }
+    }
+
+    // Prepare the SQL query to insert the feedback into the database
+    $sql = "INSERT INTO feedback (name, email, message, image) 
+            VALUES ('$name', '$email', '$message', '$image')";
+
+    // Execute the query
+    if ($conn->query($sql) === TRUE) {
+        // Set the feedback submitted flag to true
+        $feedbackSubmitted = true;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Fetch the theme after the form submission logic
+$setTheme = getTheme();
+
+// Close the database connection at the end of the script
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,8 +102,11 @@ function getTheme() {
     <title>Feedback</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="navbar.css"> <!-- Reference your navbar.css -->
+
     <?php
-    $setTheme = getTheme();
     if($setTheme == 1){
         echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
     }
@@ -54,8 +116,16 @@ function getTheme() {
     ?>
 </head>
 <body>
-    <?php include 'navbar.php'; ?> <!-- Ensuring navbar format matches index.php -->
-    
+    <!-- Include the navbar -->
+    <?php include 'navbar.php'; ?> <!-- Reference your navbar.php -->
+
+    <!-- Success Message -->
+    <?php if ($feedbackSubmitted): ?>
+        <div class="alert alert-success text-center mt-4" role="alert">
+            Feedback submitted successfully! Thank you for your input.
+        </div>
+    <?php endif; ?>
+
     <div class="container">
         <h1 class="text-center">Submit Your Feedback</h1>
         

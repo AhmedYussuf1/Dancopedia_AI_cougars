@@ -3,23 +3,12 @@
 session_start();
 
 // Database connection
-$servername = "localhost";
-$username = "root";  // Your MySQL username
-$password = "";      // Your MySQL password
-$dbname = "dance_ai";  // Your MySQL database name
-$port = 3306; // MySQL default port, change if needed
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('db_connection.php');
 
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
 $result = $conn->query($sql);
+ 
 function getTheme() {
     global $conn;  // Access the global $conn variable
     if (isset($_SESSION['username'])) {
@@ -36,6 +25,7 @@ function getTheme() {
         return 1;  // Default theme if user not logged in
     }
 }
+ 
 ?>
 
 <!-- Add Favicon -->
@@ -60,8 +50,6 @@ function getTheme() {
             echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
         }
     ?>
-    
-    <link rel="stylesheet" href="./css/index.css">
     
 </head>
 <body>
@@ -99,9 +87,9 @@ function getTheme() {
         </section>
     </div>
 
-    <!-- Dance Table Section -->
+    <!-- Dance Videos Section -->
     <div class="container my-5">
-        <h2 class="text-center">Dance Listings</h2>
+        <h2 class="text-center">Dance Videos</h2>
 
         <!-- Filters Section -->
         <div class="d-flex justify-content-between mb-3">
@@ -110,36 +98,38 @@ function getTheme() {
             <input type="text" id="search-region" class="form-control w-25" placeholder="Search by Region" onkeyup="filterDances()">
         </div>
 
-        <table class="dance-table table table-bordered">
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)">Name <i class="fa fa-sort"></i></th>
-                    <th onclick="sortTable(1)">Genre <i class="fa fa-sort"></i></th>
-                    <th onclick="sortTable(2)">Region <i class="fa fa-sort"></i></th>
-                    <th>Description</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody id="dance-list">
-                <?php
-                // Check if any data is returned
-                if ($result->num_rows > 0) {
-                    // Output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['name'] . "</td>";
-                        echo "<td>" . $row['genre'] . "</td>";
-                        echo "<td>" . $row['region'] . "</td>";
-                        echo "<td>" . $row['description'] . "</td>";
-                        echo "<td><a href='#'>View Details</a></td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5' class='text-center'>No records found</td></tr>";
+        <!-- Video Gallery -->
+        <div class="row">
+            <?php
+            // Fetch dance videos from the database
+            if ($result->num_rows > 0) {
+                // Output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    $videoURL = $row['video_url']; // Assuming your database has a column for video URLs
+                    $videoName = $row['name']; // Video name
+                    $videoGenre = $row['genre']; // Genre
+                    $videoRegion = $row['region']; // Region
+
+                    // Extract YouTube video ID from URL
+                    preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/[^\n\s]+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoURL, $matches);
+                    $videoID = $matches[1]; // YouTube video ID
+
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '    <div class="card">';
+                    echo '        <iframe width="100%" height="215" src="https://www.youtube.com/embed/' . $videoID . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    echo '        <div class="card-body">';
+                    echo '            <h5 class="card-title">' . $videoName . '</h5>';
+                    echo '            <p class="card-text">Genre: ' . $videoGenre . '</p>';
+                    echo '            <p class="card-text">Region: ' . $videoRegion . '</p>';
+                    echo '        </div>';
+                    echo '    </div>';
+                    echo '</div>';
                 }
-                ?>
-            </tbody>
-        </table>
+            } else {
+                echo "<p>No videos available.</p>";
+            }
+            ?>
+        </div>
     </div>
 
     <!-- CHAT BOX -->
@@ -224,6 +214,10 @@ function getTheme() {
     </script>
 
 </body>
+</html>
+
 <?php
 $conn->close();
-</html>
+?>
+
+

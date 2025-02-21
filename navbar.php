@@ -39,19 +39,10 @@
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'blog.php' ? 'active' : ''; ?>" href="blog.php">Blog</a>
                 </li>
-                <li class="nav-item">
-    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'feedback.php' ? 'active' : ''; ?>" href="feedback.php">Feedback</a>
-</li>
-
 
                 <!-- Feedback Link (always visible) -->
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'feedback.php' ? 'active' : ''; ?>" href="feedback.php">Feedback</a>
-                </li>
-
-                <!-- Feedback Link -->
-                <li class="nav-item">
-                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Feedback.php' ? 'active' : ''; ?>" href="feedback.php">Feedback</a>
                 </li>
 
                 <!-- Search Bar -->

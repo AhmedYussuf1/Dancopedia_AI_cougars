@@ -3,19 +3,7 @@
 session_start();
 
 // Database connection
-$servername = "localhost";
-$username = "root";  // Your MySQL username
-$password = "";      // Your MySQL password
-$dbname = "dance_ai";  // Your MySQL database name
-$port = 3306; // MySQL default port, change if needed
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('db_connection.php');
 
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
@@ -62,9 +50,6 @@ function getTheme() {
             echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
         }
     ?>
-
-    
-    <link rel="stylesheet" href="./css/index.css">
     
 </head>
 <body>

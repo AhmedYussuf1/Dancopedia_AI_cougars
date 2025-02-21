@@ -1,20 +1,8 @@
 <?php
 session_start(); // Start the session to track user login status
 
-// Database connection variables
-$servername = "localhost";  // MySQL server (usually localhost)
-$username = "root";         // MySQL username (default root for XAMPP)
-$password = "";       // MySQL password (you've set this as "ics311")
-$dbname = "dance_ai_db";    // Your actual database name
-$port = 3307;               // Assuming this is your MySQL port for XAMPP, usually 3306 but you mentioned 3307
-
-// Create the connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Database connection
+include('db_connection.php');
 
 // Check if the user is an admin
 function is_admin($user_id, $conn) {

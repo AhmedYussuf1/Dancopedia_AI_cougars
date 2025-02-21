@@ -6,8 +6,8 @@ session_start();
 $servername = "localhost";
 $username = "root";  // Your MySQL username
 $password = "";      // Your MySQL password
-$dbname = "dance_ai_db";  // Your MySQL database name
-$port = 3307; // MySQL default port, change if needed
+$dbname = "dance_ai";  // Your MySQL database name
+$port = 3306; // MySQL default port, change if needed
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
 $result = $conn->query($sql);
-
+ 
 function getTheme() {
     global $conn;  // Access the global $conn variable
     if (isset($_SESSION['username'])) {
@@ -37,7 +37,7 @@ function getTheme() {
         return 1;  // Default theme if user not logged in
     }
 }
-
+ 
 ?>
 
 <!-- Add Favicon -->
@@ -62,10 +62,13 @@ function getTheme() {
             echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
         }
     ?>
+
+    
+    <link rel="stylesheet" href="./css/index.css">
+    
 </head>
 <body>
-
-    <!-- Navbar -->
+     <!-- Navbar -->
     <?php include('navbar.php'); ?>
 
     <!-- Home Page Content -->
@@ -231,4 +234,5 @@ function getTheme() {
 <?php
 $conn->close();
 ?>
+
 

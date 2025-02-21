@@ -1,3 +1,40 @@
+<?php
+// Start session to track user login status
+session_start();
+
+// Database connection
+$servername = "localhost";
+$username = "root";  
+$password = "";      
+$dbname = "dance_ai_db";  
+$port = 3307; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+function getTheme() {
+    global $conn;
+    if (isset($_SESSION['username'])) {
+        $user_id = $_SESSION['user_id'];
+        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
+        $themeResult = $conn->query($themeQuery);
+        if ($themeResult->num_rows > 0) {
+            $row = $themeResult->fetch_assoc();
+            return $row['theme'];
+        } else {
+            return 1;  
+        }
+    } else {
+        return 1;  
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,20 +43,16 @@
     <title>Feedback</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .feedback-box {
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-    </style>
+    
+    <?php
+    $setTheme = getTheme();
+    if ($setTheme == 1) {
+        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
+    } elseif ($setTheme == 2) {
+        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
+    }
+    ?>
+
 </head>
 <body>
     <?php include 'navbar.php'; ?> <!-- Ensuring navbar format matches index.php -->

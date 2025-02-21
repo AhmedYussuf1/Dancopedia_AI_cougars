@@ -1,7 +1,7 @@
 <!-- Favicon -->
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<!-- Optional Custom CSS for Navbar Hover Effects -->
-<link href="css/navbar.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/navbar.css">
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -38,6 +38,15 @@
                 <!-- Blog Link (always visible) -->
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'blog.php' ? 'active' : ''; ?>" href="blog.php">Blog</a>
+                </li>
+                <li class="nav-item">
+    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'feedback.php' ? 'active' : ''; ?>" href="feedback.php">Feedback</a>
+</li>
+
+
+                <!-- Feedback Link (always visible) -->
+                <li class="nav-item">
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'feedback.php' ? 'active' : ''; ?>" href="feedback.php">Feedback</a>
                 </li>
 
                 <!-- Feedback Link -->

@@ -61,6 +61,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($stmt->execute()) {
         $_SESSION['message'] = "Registration successful! Please log in.";
+
+        // Create connection again (or reuse the same connection)
+        $user_id = getUserIdByName($username, $conn);
+
+        // Check if user_id was successfully fetched
+        if ($user_id) {
+            // Call the function to insert user settings
+            if (insertUserSettings($user_id, $conn)) {
+                echo "User settings added successfully!";
+            } else {
+                echo "Failed to add user settings.";
+            }
+        } else {
+            echo "Failed to fetch user_id.";
+        }
+
         header("Location: login.php");
         exit();
     } else {
@@ -71,6 +87,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Close the statement
     $stmt->close();
+}
+
+// Function to fetch user_id based on user's name
+function getUserIdByName($username, $conn) {
+    $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    if ($stmt->execute() === false) {
+        error_log('execute() failed: ' . htmlspecialchars($stmt->error));
+        return false;
+    }
+    $stmt->bind_result($user_id);
+    if ($stmt->fetch() === false) {
+        error_log('fetch() failed: ' . htmlspecialchars($stmt->error));
+        return false;
+    }
+    $stmt->close();
+    return $user_id;
+}
+
+// Insert new entry into user_settings table
+function insertUserSettings($user_id, $conn) {
+    $theme = 1;
+    $email_blog = 0; // false
+    $email_events = 0; // false
+    $email_dance = 0; // false
+    $language = "English";
+
+    $stmt = $conn->prepare("INSERT INTO user_settings (user_id, theme, email_blog, email_events, email_dance, language) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("iiiiis", $user_id, $theme, $email_blog, $email_events, $email_dance, $language);
+    if ($stmt->execute() === false) {
+        error_log('execute() failed: ' . htmlspecialchars($stmt->error));
+        return false;
+    }
+    $stmt->close();
+    return true;
 }
 
 // Close the connection

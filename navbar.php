@@ -15,6 +15,11 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <!-- link to interactive_map.html -->
+
+                <li class="nav-item">
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'interactive_map.html' ? 'active' : ''; ?>" href="interactive_map.php">Interactive Map</a>
+</
                 <!-- Home Link -->
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>" href="index.php">Home</a>

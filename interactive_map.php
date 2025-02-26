@@ -73,14 +73,14 @@ async function getCoordinates(city) {
     }
 
     let url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
- /**    
-  * The fetch() method is used to request a resource from the network.
-  * It returns a promise that resolves to the Response to that request, whether it is successful or not.
-    * You can also opt to return the data in JSON format by calling the json() method on the response.
-  * The then() method is used to execute a function after the promise is resolved (or rejected).
-  * The function receives the response from the fetch request.
-  * The catch() method is used to handle any errors that may have occurred during the fetch request.
-  */
+ /**********************************************************************************************************
+  * The fetch() method is used to request a resource from the network.                                      *       
+  * It returns a promise that resolves to the Response to that request, whether it is successful or not.    *           
+  *You can also opt to return the data in JSON format by calling the json() method on the response.             *
+  * The then() method is used to execute a function after the promise is resolved (or rejected).            *       
+  * The function receives the response from the fetch request.                                              *           
+  * The catch() method is used to handle any errors that may have occurred during the fetch request.        *   
+  ***********************************************************************************************************/
 
     return new Promise((resolve, reject) => {
         fetch(url)
@@ -103,7 +103,14 @@ async function getCoordinates(city) {
             });
     });
 }
-
+/************************************************************************************************************
+ * The fetch() method is used to request a resource from the network.                                       *
+ * It returns a promise that resolves to the Response to that request, whether it is successful or not.     * 
+ * You can also opt to return the data in JSON format by calling the json() method on the response.         *
+ * The then() method is used to execute a function after the promise is resolved (or rejected).             *       
+ * The function receives the response from the fetch request.                                               *             
+ * The catch() method is used to handle any errors that may have occurred during the fetch request.         *
+ ************************************************************************************************************/
 
         fetch("get_markers.php")
             .then(response => response.json())
@@ -111,8 +118,7 @@ async function getCoordinates(city) {
                 for (const marker of data) {
 
                     let coords = await getCoordinates(marker.city);
-                    console.log(marker.city, coords);
-                    if (coords) {
+                     if (coords) {
                         let popupContent = `
                             <div   class="  card" style="width: 18rem;">
                                  ${marker.type === "video" ? 

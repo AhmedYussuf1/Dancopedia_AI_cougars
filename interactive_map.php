@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php 
-    session_start();
-    include('db_connection.php');
+<?php
+session_start();
+require_once 'db_connection.php';
 
-    function getTheme() {
-        global $conn;
-        if (isset($_SESSION['username'])) {
-            $user_id = $_SESSION['user_id'];
-            $query = "SELECT theme FROM user_settings WHERE user_id = $user_id";
-            $result = $conn->query($query);
-            return ($result->num_rows > 0) ? $result->fetch_assoc()['theme'] : 1;
-        }
-        return 1;
+// Get user theme from database
+function getTheme($conn) {
+    if (!isset($_SESSION['username'])) {
+        return 1; // Default theme
     }
     
-    $theme = getTheme();
-    ?>
+    $user_id = $_SESSION['user_id'];
+    $query = "SELECT theme FROM user_settings WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    return ($result->num_rows > 0) ? $result->fetch_assoc()['theme'] : 1;
+}
+
+$theme = getTheme($conn);
+?>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dance USA - Home</title>
@@ -104,13 +109,17 @@ async function getCoordinates(city) {
             .then(response => response.json())
             .then(async data => {
                 for (const marker of data) {
+
                     let coords = await getCoordinates(marker.city);
+                    console.log(marker.city, coords);
                     if (coords) {
                         let popupContent = `
                             <div   class="  card" style="width: 18rem;">
                                  ${marker.type === "video" ? 
                                     `<video class="card-img-top" controls><source src="${marker.media}" type="video/mp4"></video>` : 
+                                    
                                     `<img class="card-img-top" src="${marker.media}" alt="Dance Image">
+                                     <iframe width="100%" height="215" src="${marker.media}"' . $videoID . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     '<`
                                 }
                                     <div class="card-body">
@@ -118,7 +127,7 @@ async function getCoordinates(city) {
                                 ">${marker.genre}</h5>
                                 <p class="card-text">${marker.city}</p>
                                 <p class="card-text">${marker.description}</p>
-                                 <a class=\'btn btn-outline-info\'  href="${marker.link}" >View Dance</a> 
+                                 <a href="${marker.link}" >View Dance</a>
                             </div>
                                
                                 

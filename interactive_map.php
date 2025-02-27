@@ -82,6 +82,11 @@ function getTheme() {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
+        var usaBounds = [
+            [18.91, -179.14], // Southwest corner (covers Hawaii and the westernmost part of Alaska)
+            [71.39, -66.93]   // Northeast corner (covers northern Alaska and Maine)
+        ];
+
         // Function to fetch coordinates from city name using Nominatim API
         async function getCoordinates(city) {
             let url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;

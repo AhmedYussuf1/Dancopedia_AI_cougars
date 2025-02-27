@@ -87,6 +87,17 @@ function getTheme() {
             [71.39, -66.93]   // Northeast corner (covers northern Alaska and Maine)
         ];
 
+        map.setMaxBounds(usaBounds);
+        map.setMaxZoom(8);
+        map.setZoom(4);
+        map.setMinZoom(4);
+
+        // Prevent users from panning outside the boundaries
+        map.on('drag', function() {
+            map.panInsideBounds(usaBounds, { animate: false });
+
+        });
+
         // Function to fetch coordinates from city name using Nominatim API
         async function getCoordinates(city) {
             let url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;

@@ -20,6 +20,11 @@
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>" href="index.php">Home</a>
                 </li>
 
+                <li class="nav-item">
+                    <!-- the extension should be .php  -->
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'interactive_map.php' ? 'active' : ''; ?>" href="interactive_map.php">Interactive Map</a>
+                </li>
+
                 <!-- Classical Dances Link -->
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'classical_dances.php' ? 'active' : ''; ?>" href="classical_dances.php">Classical Dances</a>

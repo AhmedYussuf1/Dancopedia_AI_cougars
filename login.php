@@ -1,20 +1,8 @@
 <?php
 session_start();
 
-// Database connection setup
-DEFINE('DATABASE_HOST', 'localhost');
-DEFINE('DATABASE_PORT', 3307);  // Custom port for XAMPP MySQL
-DEFINE('DATABASE_DATABASE', 'dance_ai_db');
-DEFINE('DATABASE_USER', 'root');
-DEFINE('DATABASE_PASSWORD', '');
-
-// Create connection
-$conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE, DATABASE_PORT);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Database connection
+include('db_connection.php');
 
 // Handle POST request for login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

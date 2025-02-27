@@ -147,8 +147,8 @@ function getTheme() {
                 <label id="message-input" for="msg"><b>Message</b></label>
                 <textarea placeholder="Type your message..." name="input" class="chatbox-text-area" required></textarea>
 
-                <button id="chat-submit" type="submit" class="btn">Send <i class="fa-regular fa-paper-plane"></i></button>
-                <button type="button" class="btn cancel" onclick="closeChatBox()">Close <i class="fa-regular fa-rectangle-xmark"></i></button>
+                <button id="chat-submit" type="submit" class="send_button">Send <i class="fa-regular fa-paper-plane"></i></button>
+                <button type="button" class="send_button cancel" onclick="closeChatBox()">Close <i class="fa-regular fa-rectangle-xmark"></i></button>
             </form>
         </div>
     </div>

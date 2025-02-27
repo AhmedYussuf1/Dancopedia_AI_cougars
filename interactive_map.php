@@ -75,13 +75,31 @@ $theme = getTheme($conn);
     
     
     <script>
-        var map = L.map('map').setView([20, 0], 2);
-        
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
+  // Initialize the map and set default view
+var map = L.map('map').setView([37.0902, -95.7129], 4); // Centered on the U.S. with zoom level 4
 
-       // Function to fetch coordinates from city name using Nominatim API with caching
+// Add OpenStreetMap tile layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Define the bounding box for the United States (latitude/longitude limits)
+var usaBounds = [
+    [24.52, -125.00], // Southwest corner
+    [49.38, -66.93]   // Northeast corner
+];
+
+// Restrict the map view to the defined U.S. boundaries
+map.setMaxBounds(usaBounds);
+
+// Prevent users from panning outside the boundaries
+map.on('drag', function() {
+    map.panInsideBounds(usaBounds, { animate: false });
+    
+});
+/**********************************************************************************************************
+ * Function to fetch coordinates from city name using Nominatim API with caching                         *
+ **********************************************************************************************************/
 async function getCoordinates(city) {
     let cacheKey = `coords_${city}`;
     let cachedData = localStorage.getItem(cacheKey);
@@ -90,22 +108,21 @@ async function getCoordinates(city) {
     }
 
     let url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
- /**********************************************************************************************************
-  * The fetch() method is used to request a resource from the network.                                      *       
-  * It returns a promise that resolves to the Response to that request, whether it is successful or not.    *           
-  *You can also opt to return the data in JSON format by calling the json() method on the response.             *
-  * The then() method is used to execute a function after the promise is resolved (or rejected).            *       
-  * The function receives the response from the fetch request.                                              *           
-  * The catch() method is used to handle any errors that may have occurred during the fetch request.        *   
-  ***********************************************************************************************************/
+
+    /**********************************************************************************************************
+     * The fetch() method is used to request a resource from the network.                                     *       
+     * It returns a promise that resolves to the Response to that request, whether it is successful or not.   *           
+     * You can also opt to return the data in JSON format by calling the json() method on the response.       *
+     * The then() method is used to execute a function after the promise is resolved (or rejected).           *       
+     * The function receives the response from the fetch request.                                             *           
+     * The catch() method is used to handle any errors that may have occurred during the fetch request.       *   
+     ***********************************************************************************************************/
 
     return new Promise((resolve, reject) => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
-
-                
                     let coords = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
                     localStorage.setItem(cacheKey, JSON.stringify(coords)); // Cache the result
                     resolve(coords);
@@ -119,7 +136,9 @@ async function getCoordinates(city) {
                 resolve(null);
             });
     });
+    
 }
+
 /************************************************************************************************************
  * The fetch() method is used to request a resource from the network.                                       *
  * It returns a promise that resolves to the Response to that request, whether it is successful or not.     * 

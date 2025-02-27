@@ -50,12 +50,29 @@ $theme = getTheme($conn);
             width: 200px; 
             height: auto;
         }
+        .btn-outline-info{
+            margin-top: 10px;
+            background-color:rgb(46, 133, 146);
+            color: white;
+            width;  2px;
+            border-radius: 15px;
+
+        }
+        .btn-outline-info:hover{
+            background-color:rgb(46, 146, 74);
+            color: white;
+            width;  2px;
+            border-radius: 15px;
+            z-index: 2;
+            s
+        }
     </style>
 </head>
 <body>
     <?php include('navbar.php'); ?>
     
     <div id="map"></div>
+    
     
     <script>
         var map = L.map('map').setView([20, 0], 2);
@@ -133,7 +150,7 @@ async function getCoordinates(city) {
                                 ">${marker.genre}</h5>
                                 <p class="card-text">${marker.city}</p>
                                 <p class="card-text">${marker.description}</p>
-                                 <a href="${marker.link}" >View Dance</a>
+                                <button class="btn btn-outline-info" onclick="window.location.href='${marker.link}'">View Dance</button>
                             </div>
                                
                                 

@@ -77,24 +77,28 @@ $theme = getTheme($conn);
     <script>
   // Initialize the map and set default view
 var map = L.map('map').setView([37.0902, -95.7129], 4); // Centered on the U.S. with zoom level 4
-
+ 
 // Add OpenStreetMap tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
+  
 }).addTo(map);
 
 // Define the bounding box for the United States (latitude/longitude limits)
 var usaBounds = [
-    [24.52, -125.00], // Southwest corner
-    [49.38, -66.93]   // Northeast corner
+    [18.91, -179.14], // Southwest corner (covers Hawaii and the westernmost part of Alaska)
+    [71.39, -66.93]   // Northeast corner (covers northern Alaska and Maine)
 ];
-
 // Restrict the map view to the defined U.S. boundaries
 map.setMaxBounds(usaBounds);
+map.setMaxZoom(8);
+map.setZoom(4);
+map.setMinZoom(4);
 
 // Prevent users from panning outside the boundaries
 map.on('drag', function() {
     map.panInsideBounds(usaBounds, { animate: false });
+   
     
 });
 /**********************************************************************************************************

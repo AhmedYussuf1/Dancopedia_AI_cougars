@@ -2,14 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection settings
- require_once 'db_config.php';
-// Create connection
-$conn = new mysqli($host, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
-}
+include('db_connection.php'); 
 
 // Query to fetch dance data
 $sql = "SELECT name, description, region, image_url, video_url, link, genre FROM dances";

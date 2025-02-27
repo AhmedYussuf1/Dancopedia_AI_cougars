@@ -15,6 +15,8 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <!-- link to interactive_map.html -->
+
                 <!-- Home Link -->
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>" href="index.php">Home</a>
@@ -108,5 +110,3 @@ function searchDances() {
     }
 }
 </script>
-
-

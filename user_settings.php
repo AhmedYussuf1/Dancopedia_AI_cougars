@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newpassword = $_POST['User_New_Password'];
     $oldpassword = $_POST['User_Old_Password'];
 
-    // Define the update query parts array
+    // Define the update query parts array for user_settings
     $update_parts = [];
 
     // Add theme to update query if changed
@@ -67,33 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $types[] = 'i';
     }
 
-    // Check if the new password is provided
-    if (!empty($newpassword)) {
-        if ($newpassword != $oldpassword) {
-            // Query to get the old password from the database
-            $stmt = $conn->prepare("SELECT password FROM users WHERE user_id = ?");
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-            $stmt->bind_result($db_old_password);
-            $stmt->fetch();
-            $stmt->close();
-
-            if (password_verify($oldpassword, $db_old_password)) {
-                // Add New password to update query to replace old password
-                $hashed_new_password = password_hash($newpassword, PASSWORD_DEFAULT);
-                $update_parts[] = "password_hash = ?";
-                $params[] = $hashed_new_password;
-                $types[] = 's';
-                $passwordSuccessMessage = "Updated Password";
-            } else {
-                $passwordErrorMessage = "Old Password Incorrect";
-            }
-        } else {
-            $passwordErrorMessage = "New password cannot be old password";
-        }
-    }
-
-    // Combine all update parts into the final query
+    // Combine all update parts into the final query for user_settings
     if (!empty($update_parts)) {
         $query = "UPDATE user_settings SET " . implode(", ", $update_parts) . " WHERE user_id = ?";
         $params[] = $user_id;
@@ -110,14 +84,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMessage = "Error: Occured";
         }
 
-        //Update sections of page to keep updated with any changes made
         // Update local variables with new values
         $theme = $themeselect;
         $checkbox_states['BlogCheck'] = $blogcheck;
         $checkbox_states['EventsCheck'] = $eventcheck;
         $checkbox_states['DanceCheck'] = $dancecheck;
     }
+
+    // Check if the new password is provided
+    if (!empty($newpassword)) {
+        if ($newpassword != $oldpassword) {
+            // Query to get the old password from the database
+            $stmt = $conn->prepare("SELECT password_hash FROM users WHERE user_id = ?");
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $stmt->bind_result($db_old_password);
+            $stmt->fetch();
+            $stmt->close();
+
+            if (password_verify($oldpassword, $db_old_password)) {
+                // Update the new password in the users table
+                $hashed_new_password = password_hash($newpassword, PASSWORD_BCRYPT);
+                $stmt = $conn->prepare("UPDATE users SET password_hash = ? WHERE user_id = ?");
+                $stmt->bind_param("si", $hashed_new_password, $user_id);
+
+                // Execute the query and check if successful
+                if ($stmt->execute()) {
+                    $passwordSuccessMessage = "Updated Password";
+                } else {
+                    $passwordErrorMessage = "Error: Occured updating password";
+                }
+            } else {
+                $passwordErrorMessage = "Old Password Incorrect";
+            }
+        } else {
+            $passwordErrorMessage = "New password cannot be old password";
+        }
+    }
 }
+
 
 
 // Include the navbar (which already contains session_start())

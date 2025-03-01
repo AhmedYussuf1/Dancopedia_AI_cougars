@@ -9,10 +9,10 @@ function getTheme() {
             $row = $themeResult->fetch_assoc();
             return $row['theme'];
         } else {
-            return 1;  // Default theme if no result found
+            return 2;  // Default theme if no result found
         }
     } else {
-        return 1;  // Default theme if user not logged in
+        return 2;  // Default theme if user not logged in
     }
 }
 $setTheme = getTheme();

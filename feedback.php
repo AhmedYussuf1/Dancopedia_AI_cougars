@@ -1,7 +1,8 @@
 <?php
 // Start session to track user login status
 session_start();
-
+//Navbar
+include 'navbar.php';
 // Database connection
 $servername = "localhost";
 $username = "root";  // Your MySQL username
@@ -17,22 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-function getTheme() {
-    global $conn;  // Access the global $conn variable
-    if (isset($_SESSION['username'])) {
-        $user_id = $_SESSION['user_id'];
-        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
-        $themeResult = $conn->query($themeQuery);
-        if ($themeResult->num_rows > 0) {
-            $row = $themeResult->fetch_assoc();
-            return $row['theme'];
-        } else {
-            return 1;  // Default theme if no result found
-        }
-    } else {
-        return 1;  // Default theme if user not logged in
-    }
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -44,18 +30,10 @@ function getTheme() {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php
-    $setTheme = getTheme();
-    if($setTheme == 1){
-        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
-    }
-    elseif ($setTheme == 2){
-        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
-    }
+        include('getTheme.php')
     ?>
 </head>
 <body>
-    <?php include 'navbar.php'; ?> <!-- Ensuring navbar format matches index.php -->
-    
     <div class="container">
         <h1 class="text-center">Submit Your Feedback</h1>
         

@@ -1,28 +1,12 @@
+<?php
+session_start();
+include('navbar.php');
+require_once 'db_connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    session_start();
-    require_once 'db_connection.php';
 
-    // Get user theme from database
-    function getTheme($conn) {
-        if (!isset($_SESSION['username'])) {
-            return 1; // Default theme
-        }
-
-        $user_id = $_SESSION['user_id'];
-        $query = "SELECT theme FROM user_settings WHERE user_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return ($result->num_rows > 0) ? $result->fetch_assoc()['theme'] : 1;
-    }
-
-    $theme = getTheme($conn);
-    ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dance USA - Home</title>
@@ -32,7 +16,9 @@
     <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Theme CSS -->
-    <link href="css/style<?= $theme == 2 ? 'Dark' : 'Light' ?>.css" rel="stylesheet">
+    <?php
+        include('getTheme.php')
+    ?>
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/navbar.css">
@@ -69,7 +55,6 @@
     </style>
 </head>
 <body>
-<?php include('navbar.php'); ?>
 
 <div id="map"></div>
 

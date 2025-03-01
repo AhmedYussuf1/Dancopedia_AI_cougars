@@ -4,6 +4,9 @@ session_start(); // Start the session to track user login status
 // Database connection
 include('db_connection.php');
 
+//Navbar
+include('navbar.php');
+
 // Check if the user is an admin
 function is_admin($user_id, $conn) {
     $stmt = $conn->prepare("SELECT role FROM users WHERE user_id = ?");
@@ -149,22 +152,7 @@ if (isset($_GET['delete']) && isset($_SESSION['user_id'])) {
 $sql = "SELECT posts.id, posts.title, posts.content, posts.image, users.username, posts.user_id FROM posts JOIN users ON posts.user_id = users.user_id ORDER BY posts.created_at DESC";
 $result = $conn->query($sql);
 
-function getTheme() {
-    global $conn;  // Access the global $conn variable
-    if (isset($_SESSION['username'])) {
-        $user_id = $_SESSION['user_id'];
-        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
-        $themeResult = $conn->query($themeQuery);
-        if ($themeResult->num_rows > 0) {
-            $row = $themeResult->fetch_assoc();
-            return $row['theme'];
-        } else {
-            return 1;  // Default theme if no result found
-        }
-    } else {
-        return 1;  // Default theme if user not logged in
-    }
-}
+
 
 ?>
 
@@ -177,13 +165,7 @@ function getTheme() {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php
-    $setTheme = getTheme();
-    if($setTheme == 1){
-        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
-    }
-    elseif ($setTheme == 2){
-        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
-    }
+        include('getTheme.php')
     ?>
     <style>
         /* Modal Styles */
@@ -202,9 +184,6 @@ function getTheme() {
     </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<?php include('navbar.php'); ?>
 
 <!-- Blog Content -->
 <div class="container-sm">

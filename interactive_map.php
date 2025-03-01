@@ -17,13 +17,13 @@ require_once 'db_connection.php';
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Theme CSS -->
     <?php
-        include('getTheme.php')
+    include('getTheme.php')
     ?>
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/navbar.css">
     <!-- Leaflet CSS & JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <style>
@@ -32,22 +32,27 @@ require_once 'db_connection.php';
             width: 98%;
             margin: 20px auto;
         }
+
         .popup-content img, .popup-content video {
             width: 200px;
             height: auto;
         }
-        .btn-outline-info{
+
+        .btn-outline-info {
             margin-top: 10px;
-            background-color:rgb(46, 133, 146);
+            background-color: rgb(46, 133, 146);
             color: white;
-            width;  2px;
+            width;
+            2px;
             border-radius: 15px;
 
         }
-        .btn-outline-info:hover{
-            background-color:rgb(46, 146, 74);
+
+        .btn-outline-info:hover {
+            background-color: rgb(46, 146, 74);
             color: white;
-            width;  2px;
+            width;
+            2px;
             border-radius: 15px;
             z-index: 2;
             s
@@ -81,11 +86,12 @@ require_once 'db_connection.php';
     map.setMinZoom(4);
 
     // Prevent users from panning outside the boundaries
-    map.on('drag', function() {
-        map.panInsideBounds(usaBounds, { animate: false });
+    map.on('drag', function () {
+        map.panInsideBounds(usaBounds, {animate: false});
 
 
     });
+
     /**********************************************************************************************************
      * Function to fetch coordinates from city name using Nominatim API with caching                         *
      **********************************************************************************************************/
@@ -145,32 +151,24 @@ require_once 'db_connection.php';
                 let coords = await getCoordinates(marker.city);
                 if (coords) {
                     let popupContent = `
-                            <div   class="  card" style="width: 18rem;">
-                                 ${marker.type === "video" ?
-                        `<video class="card-img-top" controls><source src="${marker.media}" type="video/mp4"></video>` :
-
-                        `<img class="card-img-top" src="${marker.media}" alt="Dance Image">
-                                     <iframe width="100%" height="215" src="${marker.media}"' . $videoID . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    '<`
-                    }
-                                    <div class="card-body">
-                                <h5 class="card-title
-                                ">${marker.genre}</h5>
+                        <div class="card" style="width: 18rem;">
+                            ${marker.type === "video" ?
+                                `<video class="card-img-top" controls>
+                                    <source src="${marker.media}" type="video/mp4">
+                                </video>` :
+                                `<img class="card-img-top" src="${marker.media}" alt="Dance Image">
+                                <iframe width="100%" height="215" src="${marker.media}' . $videoID . '" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>`
+                            }
+                            <div class="card-body">
+                                <h5 class="card-title">${marker.genre}</h5>
                                 <p class="card-text">${marker.city}</p>
                                 <p class="card-text">${marker.description}</p>
                                 <button class="btn btn-outline-info" onclick="window.location.href='${marker.link}'">View Dance</button>
                             </div>
-
-
-                            </div>
-
-
-
-
-
-
-
-                        `;
+                        </div>`;
                     L.marker(coords).addTo(map).bindPopup(popupContent);
                 } else {
                     console.error("Could not find coordinates for:", marker.city);

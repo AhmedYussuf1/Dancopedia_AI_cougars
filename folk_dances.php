@@ -2,6 +2,8 @@
 session_start();
 // Include the navbar (which already contains session_start())
 include('navbar.php');
+// Database connection
+include('db_connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -12,11 +14,13 @@ include('navbar.php');
     <title>American Folk Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php
+        include('getTheme.php')
+    ?>
     <style>
         /* Custom Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
         }
 
         .main-content {
@@ -24,11 +28,9 @@ include('navbar.php');
         }
 
         .dance-card {
-            border: 1px solid #ddd;
+            border: 1px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            background-color: #fff;
         }
 
         .dance-card img {
@@ -46,12 +48,6 @@ include('navbar.php');
             font-weight: bold;
         }
 
-        .footer {
-            background-color: #343a40;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -65,7 +61,7 @@ include('navbar.php');
 
         <div class="row">
             <!-- Square Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/folk/square_dance.jpg" alt="Square Dance">
                     <div class="card-body dance-card-body">
@@ -78,7 +74,7 @@ include('navbar.php');
             </div>
 
             <!-- Appalachian Clog Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/folk/appalachian_clog.jpg" alt="Appalachian Clog Dance">
                     <div class="card-body dance-card-body">
@@ -91,7 +87,7 @@ include('navbar.php');
             </div>
 
             <!-- Cajun Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/folk/cajun_dance.jpg" alt="Cajun Dance">
                     <div class="card-body dance-card-body">
@@ -106,7 +102,7 @@ include('navbar.php');
 
         <div class="row mt-4">
             <!-- Contra Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/folk/contra_dance.jpg" alt="Contra Dance">
                     <div class="card-body dance-card-body">
@@ -119,7 +115,7 @@ include('navbar.php');
             </div>
 
             <!-- Native American Powwow Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/folk/powwow_dance.jpg" alt="Native American Powwow Dance">
                     <div class="card-body dance-card-body">
@@ -132,7 +128,7 @@ include('navbar.php');
             </div>
 
             <!-- Texas Two-Step -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/folk/texas_two_step.jpg" alt="Texas Two-Step">
                     <div class="card-body dance-card-body">

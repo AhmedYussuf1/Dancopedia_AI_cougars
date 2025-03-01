@@ -2,6 +2,8 @@
 session_start();
 // Include the navbar (which already contains session_start())
 include('navbar.php');
+// Database connection
+include('db_connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -12,11 +14,13 @@ include('navbar.php');
     <title>American Contemporary Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php
+        include('getTheme.php')
+    ?>
     <style>
         /* Custom Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
         }
 
         .main-content {
@@ -24,11 +28,9 @@ include('navbar.php');
         }
 
         .dance-card {
-            border: 1px solid #ddd;
+            border: 1px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            background-color: #fff;
         }
 
         .dance-card img {
@@ -45,13 +47,6 @@ include('navbar.php');
             font-size: 1.5rem;
             font-weight: bold;
         }
-
-        .footer {
-            background-color: #343a40;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -65,12 +60,12 @@ include('navbar.php');
 
         <div class="row">
             <!-- Modern Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/contemporary/modern_dance.jpg" alt="Modern Dance">
                     <div class="card-body dance-card-body">
                         <h5 class="card-title">Modern Dance</h5>
-                        <p class="card-text">
+                        <p class="card-text lg-4">
                             Modern dance is a broad dance genre that emerged in the early 20th century as a response to the rigidity of ballet. It focuses on creativity, self-expression, and often uses unconventional movements.
                         </p>
                     </div>
@@ -78,12 +73,12 @@ include('navbar.php');
             </div>
 
             <!-- Hip Hop Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/contemporary/hip_hop_dance.jpg" alt="Hip Hop Dance">
                     <div class="card-body dance-card-body">
                         <h5 class="card-title">Hip Hop Dance</h5>
-                        <p class="card-text">
+                        <p class="card-text lg-4">
                             Hip hop dance includes a variety of styles such as breakdancing, popping, and locking. It developed alongside hip hop music in the 1970s in New York City and has become a worldwide cultural phenomenon.
                         </p>
                     </div>
@@ -91,12 +86,12 @@ include('navbar.php');
             </div>
 
             <!-- Jazz Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/contemporary/jazz_dance.jpg" alt="Jazz Dance">
                     <div class="card-body dance-card-body">
                         <h5 class="card-title">Jazz Dance</h5>
-                        <p class="card-text">
+                        <p class="card-text lg-4">
                             Jazz dance is known for its energetic movements, improvisation, and theatrical style. It developed alongside jazz music and is often used in musical theater, contemporary performances, and pop culture.
                         </p>
                     </div>
@@ -104,7 +99,7 @@ include('navbar.php');
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4 d-flex">
             <!-- Contemporary Ballet -->
             <div class="col-md-4">
                 <div class="card dance-card">
@@ -119,7 +114,7 @@ include('navbar.php');
             </div>
 
             <!-- Tap Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/contemporary/tap_dance.jpg" alt="Tap Dance">
                     <div class="card-body dance-card-body">
@@ -132,7 +127,7 @@ include('navbar.php');
             </div>
 
             <!-- Lyrical Dance -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex">
                 <div class="card dance-card">
                     <img src="images/contemporary/lyrical_dance.jpg" alt="Lyrical Dance">
                     <div class="card-body dance-card-body">

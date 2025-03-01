@@ -80,7 +80,7 @@ nav.navbar .nav-item {
 .dropdown-menu {
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6); /* Add a subtle shadow */
-    background-color: #343a40;
+    background-color: #000000;
 }
 
 .dropdown-item {
@@ -91,7 +91,7 @@ nav.navbar .nav-item {
 
 .card{
     --bs-card-bg:none;
-    background-color: #252323;
+    background-color: #000000;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     border: none;
 }
@@ -102,8 +102,9 @@ nav.navbar .nav-item {
 }
 
 .dropdown-item:hover {
-    background-color: #5a5a5a; /* Slightly lighter background on hover */
+    background-color: #343a40; /* Slightly lighter background on hover */
     font-weight: bold; /* Make text bold on hover */
+    color: black;
 }
 
 /* Adjustments for smaller screens (mobile view) */
@@ -122,7 +123,7 @@ html, body {
     display: flex;
     flex-direction: column;
     color:white;
-    background-color: #121212;
+    background-color: #000000;
 }
 
 /* Main container should take all available space except the footer */
@@ -132,15 +133,16 @@ html, body {
 
 /* Footer styling */
 footer {
-    background-color: #121212;
+    background-color: #000000;
     padding: 10px;
     text-align: center;
+    box-shadow: 0 -10px 10px rgba(255, 255, 255, 0.6);
 }
 
 /* About section styling */
 .about-section {
     padding: 50px 0;
-    background-color: #222121;
+    background-color: #000000;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
@@ -422,12 +424,12 @@ textarea:focus {
 }
 
 .card-body{
-    background-color: #121212;
+    background-color: #000000;
 }
 
 /* Dance Pages */
 .dance-card {
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
-    background-color: #121212;
+    background-color: #000000;
     color: white;
 }

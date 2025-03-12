@@ -179,5 +179,6 @@ require_once 'db_connection.php';
         })
         .catch(error => console.error("Error loading markers:", error));
 </script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

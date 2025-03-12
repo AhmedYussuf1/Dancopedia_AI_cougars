@@ -28,7 +28,8 @@ require_once 'db_connection.php';
 
     <style>
         #map {
-            height: 700px;
+            min-height: 700px;
+            height: 100%;
             width: 98%;
             margin: 20px auto;
         }
@@ -150,25 +151,26 @@ require_once 'db_connection.php';
 
                 let coords = await getCoordinates(marker.city);
                 if (coords) {
-                    let popupContent = `
-                        <div class="card" style="width: 18rem;">
-                            ${marker.type === "video" ?
-                                `<video class="card-img-top" controls>
-                                    <source src="${marker.media}" type="video/mp4">
-                                </video>` :
-                                `<img class="card-img-top" src="${marker.media}" alt="Dance Image">
-                                <iframe width="100%" height="215" src="${marker.media}' . $videoID . '" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen>
-                                </iframe>`
-                            }
-                            <div class="card-body">
-                                <h5 class="card-title">${marker.genre}</h5>
-                                <p class="card-text">${marker.city}</p>
-                                <p class="card-text">${marker.description}</p>
-                                <button class="btn btn-outline-info" onclick="window.location.href='${marker.link}'">View Dance</button>
-                            </div>
-                        </div>`;
+                    let popupContent = `<div class="card" style="width: 18rem;">
+         ${marker.type === "video" ?
+                        (marker.media.includes("youtube.com") || marker.media.includes("youtu.be") ?
+                                `<iframe width="100%" height="215" src="https://www.youtube.com/embed/${getYouTubeID(marker.media)}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` :
+                                `<video class="card-img-top" controls><source src="${marker.media}" type="video/mp4"></video>`
+                        ) :
+                        `<img class="card-img-top" src="${marker.media}" alt="Dance Image">`
+                    }
+         <div class="card-body">
+             <h5 class="card-title">${marker.genre}</h5>
+             <p class="card-text">${marker.city}</p>
+             <p class="card-text">${marker.description}</p>
+          </div>
+     </div>`;
+
+                    function getYouTubeID(url) {
+                        let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([\w-]{11})/);
+                        return match ? match[1] : null;
+                    }
+
                     L.marker(coords).addTo(map).bindPopup(popupContent);
                 } else {
                     console.error("Could not find coordinates for:", marker.city);

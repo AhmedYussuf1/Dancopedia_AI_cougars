@@ -122,6 +122,39 @@ $usersQuery = $conn->query("SELECT * FROM users");
                 <?php } ?>
             </tbody>
         </table>
+
+        <!-- Feedback Section -->
+        <h2>Feedback</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Feedback ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Submitted On</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            include 'db_connection.php';
+            $feedback_result = mysqli_query($conn, "SELECT * FROM feedback ORDER BY created_at DESC");
+
+            while ($row = mysqli_fetch_assoc($feedback_result)) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['email']); ?></td>
+                    <td><?php echo htmlspecialchars($row['message']); ?></td>
+                    <td><?php echo $row['created_at']; ?></td>
+                    <td>
+                        <a href="delete_feedback.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this feedback?')">Delete</a>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
     </div>
 
     <!-- jQuery -->

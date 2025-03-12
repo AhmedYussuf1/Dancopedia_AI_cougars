@@ -27,98 +27,119 @@ function isSelected($option, $theme) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
     $user_id = $_SESSION['user_id'];
-    $themeselect = $_POST['themeselect'];
-    $blogcheck = isset($_POST['BlogCheck']) ? 1 : 0;
-    $eventcheck = isset($_POST['EventCheck']) ? 1 : 0;
-    $dancecheck = isset($_POST['DanceCheck']) ? 1 : 0;
-    $newpassword = $_POST['User_New_Password'];
-    $oldpassword = $_POST['User_Old_Password'];
+    $delaccount = isset($_POST['delAccountInput']) ? 1 : 0;
 
-    // Define the update query parts array for user_settings
-    $update_parts = [];
+    if($delaccount){
+        // Query to delete user account
+        $stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
 
-    // Add theme to update query if changed
-    if ($themeselect != $theme) {
-        $update_parts[] = "theme = ?";
-        $params[] = $themeselect;
-        $types[] = 's';
-    }
-
-    // Add Blog Check to update query if changed
-    if ($blogcheck != $checkbox_states['BlogCheck']) {
-        $update_parts[] = "email_blog = ?";
-        $params[] = $blogcheck;
-        $types[] = 'i';
-    }
-
-    // Add Events Check to update query if changed
-    if ($eventcheck != $checkbox_states['EventsCheck']) {
-        $update_parts[] = "email_events = ?";
-        $params[] = $eventcheck;
-        $types[] = 'i';
-    }
-
-    // Add Dance Check to update query if changed
-    if ($dancecheck != $checkbox_states['DanceCheck']) {
-        $update_parts[] = "email_dance = ?";
-        $params[] = $dancecheck;
-        $types[] = 'i';
-    }
-
-    // Combine all update parts into the final query for user_settings
-    if (!empty($update_parts)) {
-        $query = "UPDATE user_settings SET " . implode(", ", $update_parts) . " WHERE user_id = ?";
-        $params[] = $user_id;
-        $types[] = 'i';
-
-        // Prepare and bind the query
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(implode("", $types), ...$params);
 
         // Execute the query and check if successful
         if ($stmt->execute()) {
-            $successMessage = "User Settings Updated!";
+            session_destroy();
+            header("Location: index.php");
+            exit();
+            //Send to Home Page
         } else {
-            $errorMessage = "Error: Occured";
+            $deleteErrorMessage = "Error: Occured updating password";
+        }
+        $stmt->close();
+    }
+    else {
+        // Get form data
+        $themeselect = $_POST['themeselect'];
+        $blogcheck = isset($_POST['BlogCheck']) ? 1 : 0;
+        $eventcheck = isset($_POST['EventCheck']) ? 1 : 0;
+        $dancecheck = isset($_POST['DanceCheck']) ? 1 : 0;
+        $newpassword = $_POST['User_New_Password'];
+        $oldpassword = $_POST['User_Old_Password'];
+
+        // Define the update query parts array for user_settings
+        $update_parts = [];
+
+        // Add theme to update query if changed
+        if ($themeselect != $theme) {
+            $update_parts[] = "theme = ?";
+            $params[] = $themeselect;
+            $types[] = 's';
         }
 
-        // Update local variables with new values
-        $theme = $themeselect;
-        $checkbox_states['BlogCheck'] = $blogcheck;
-        $checkbox_states['EventsCheck'] = $eventcheck;
-        $checkbox_states['DanceCheck'] = $dancecheck;
-    }
+        // Add Blog Check to update query if changed
+        if ($blogcheck != $checkbox_states['BlogCheck']) {
+            $update_parts[] = "email_blog = ?";
+            $params[] = $blogcheck;
+            $types[] = 'i';
+        }
 
-    // Check if the new password is provided
-    if (!empty($newpassword)) {
-        if ($newpassword != $oldpassword) {
-            // Query to get the old password from the database
-            $stmt = $conn->prepare("SELECT password_hash FROM users WHERE user_id = ?");
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-            $stmt->bind_result($db_old_password);
-            $stmt->fetch();
-            $stmt->close();
+        // Add Events Check to update query if changed
+        if ($eventcheck != $checkbox_states['EventsCheck']) {
+            $update_parts[] = "email_events = ?";
+            $params[] = $eventcheck;
+            $types[] = 'i';
+        }
 
-            if (password_verify($oldpassword, $db_old_password)) {
-                // Update the new password in the users table
-                $hashed_new_password = password_hash($newpassword, PASSWORD_BCRYPT);
-                $stmt = $conn->prepare("UPDATE users SET password_hash = ? WHERE user_id = ?");
-                $stmt->bind_param("si", $hashed_new_password, $user_id);
+        // Add Dance Check to update query if changed
+        if ($dancecheck != $checkbox_states['DanceCheck']) {
+            $update_parts[] = "email_dance = ?";
+            $params[] = $dancecheck;
+            $types[] = 'i';
+        }
 
-                // Execute the query and check if successful
-                if ($stmt->execute()) {
-                    $passwordSuccessMessage = "Updated Password";
+        // Combine all update parts into the final query for user_settings
+        if (!empty($update_parts)) {
+            $query = "UPDATE user_settings SET " . implode(", ", $update_parts) . " WHERE user_id = ?";
+            $params[] = $user_id;
+            $types[] = 'i';
+
+            // Prepare and bind the query
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param(implode("", $types), ...$params);
+
+            // Execute the query and check if successful
+            if ($stmt->execute()) {
+                $successMessage = "User Settings Updated!";
+            } else {
+                $errorMessage = "Error: Occured";
+            }
+
+            // Update local variables with new values
+            $theme = $themeselect;
+            $checkbox_states['BlogCheck'] = $blogcheck;
+            $checkbox_states['EventsCheck'] = $eventcheck;
+            $checkbox_states['DanceCheck'] = $dancecheck;
+        }
+
+        // Check if the new password is provided
+        if (!empty($newpassword)) {
+            if ($newpassword != $oldpassword) {
+                // Query to get the old password from the database
+                $stmt = $conn->prepare("SELECT password_hash FROM users WHERE user_id = ?");
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
+                $stmt->bind_result($db_old_password);
+                $stmt->fetch();
+                $stmt->close();
+
+                if (password_verify($oldpassword, $db_old_password)) {
+                    // Update the new password in the users table
+                    $hashed_new_password = password_hash($newpassword, PASSWORD_BCRYPT);
+                    $stmt = $conn->prepare("UPDATE users SET password_hash = ? WHERE user_id = ?");
+                    $stmt->bind_param("si", $hashed_new_password, $user_id);
+
+                    // Execute the query and check if successful
+                    if ($stmt->execute()) {
+                        $passwordSuccessMessage = "Updated Password";
+                    } else {
+                        $passwordErrorMessage = "Error: Occured updating password";
+                    }
                 } else {
-                    $passwordErrorMessage = "Error: Occured updating password";
+                    $passwordErrorMessage = "Old Password Incorrect";
                 }
             } else {
-                $passwordErrorMessage = "Old Password Incorrect";
+                $passwordErrorMessage = "New password cannot be old password";
             }
-        } else {
-            $passwordErrorMessage = "New password cannot be old password";
         }
     }
 }
@@ -166,7 +187,11 @@ if(isset($_POST['account_delete_button'])) {
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                <form method="POST">
+                    <button class="btn btn-danger" type="submit" id="confirmDelete">Delete</button>
+                    <input name="delAccountInput" id="delAccountInput" type="hidden" value="1">
+                </form>
+
             </div>
         </div>
     </div>
@@ -220,6 +245,11 @@ if(isset($_POST['account_delete_button'])) {
     </div>
     <div class="container"><button class="btn btn-primary" type="submit">Update Preferences</button></div>
 </form>
+<?php if (isset($deleteErrorMessage)) { ?>
+<div class="alert alert-danger" role="alert">
+    <?php echo $deleteErrorMessage; ?>
+</div>
+<?php }?>
 <div class="container mt-5"><button class="btn btn-danger" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">Delete Account</button></div>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/Simple-Slider-swiper-bundle.min.js"></script>

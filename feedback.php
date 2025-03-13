@@ -3,23 +3,7 @@
 session_start();
 //Navbar
 include 'navbar.php';
-// Database connection
-$servername = "localhost";
-$username = "root";  // Your MySQL username
-$password = "";      // Your MySQL password
-$dbname = "dance_ai_db";  // Your MySQL database name
-$port = 3307; // MySQL default port, change if needed
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-
+include('db_connection.php');  // Include your database connection
 ?>
 <!DOCTYPE html>
 <html lang="en">

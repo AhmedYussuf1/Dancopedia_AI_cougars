@@ -61,6 +61,7 @@ require_once 'db_connection.php';
     </style>
 </head>
 <body>
+<?php include('navbar.php'); ?>
 
 <div id="map"></div>
 
@@ -87,12 +88,11 @@ require_once 'db_connection.php';
     map.setMinZoom(4);
 
     // Prevent users from panning outside the boundaries
-    map.on('drag', function () {
-        map.panInsideBounds(usaBounds, {animate: false});
+    map.on('drag', function() {
+        map.panInsideBounds(usaBounds, { animate: false });
 
 
     });
-
     /**********************************************************************************************************
      * Function to fetch coordinates from city name using Nominatim API with caching                         *
      **********************************************************************************************************/
@@ -148,29 +148,33 @@ require_once 'db_connection.php';
         .then(response => response.json())
         .then(async data => {
             for (const marker of data) {
+                console.log("========================== video link=============")
+                console.log(marker.media);
+                console.log("========================== video ID=============")
+
+                console.log(marker.videoID);
+
 
                 let coords = await getCoordinates(marker.city);
                 if (coords) {
                     let popupContent = `<div class="card" style="width: 18rem;">
-         ${marker.type === "video" ?
+        ${marker.type === "video" ?
                         (marker.media.includes("youtube.com") || marker.media.includes("youtu.be") ?
                                 `<iframe width="100%" height="215" src="https://www.youtube.com/embed/${getYouTubeID(marker.media)}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` :
                                 `<video class="card-img-top" controls><source src="${marker.media}" type="video/mp4"></video>`
                         ) :
                         `<img class="card-img-top" src="${marker.media}" alt="Dance Image">`
                     }
-         <div class="card-body">
-             <h5 class="card-title">${marker.genre}</h5>
-             <p class="card-text">${marker.city}</p>
-             <p class="card-text">${marker.description}</p>
-          </div>
-     </div>`;
-
+        <div class="card-body">
+            <h5 class="card-title">${marker.genre}</h5>
+            <p class="card-text">${marker.city}</p>
+            <p class="card-text">${marker.description}</p>
+         </div>
+    </div>`;
                     function getYouTubeID(url) {
                         let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([\w-]{11})/);
                         return match ? match[1] : null;
                     }
-
                     L.marker(coords).addTo(map).bindPopup(popupContent);
                 } else {
                     console.error("Could not find coordinates for:", marker.city);
@@ -178,6 +182,7 @@ require_once 'db_connection.php';
             }
         })
         .catch(error => console.error("Error loading markers:", error));
+
 </script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

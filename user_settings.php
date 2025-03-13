@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
             //Send to Home Page
         } else {
-            $deleteErrorMessage = "Error: Occured updating password";
+            $deleteErrorMessage = "Error: Occured deleting account";
         }
         $stmt->close();
     }

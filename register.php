@@ -108,7 +108,7 @@ function getUserIdByName($username, $conn) {
 
 // Insert new entry into user_settings table
 function insertUserSettings($user_id, $conn) {
-    $theme = 1;
+    $theme = 2;
     $email_blog = 0; // false
     $email_events = 0; // false
     $email_dance = 0; // false

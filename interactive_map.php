@@ -4,6 +4,7 @@
 <?php
 session_start();
 require_once 'db_connection.php';
+include('navbar.php'); 
 
 // Get user theme from database
 function getTheme($conn) {
@@ -42,9 +43,11 @@ $theme = getTheme($conn);
     
     <style>
         #map { 
-            height: 700px; 
             width: 98%;
             margin: 20px auto;
+            min-height: 700px;
+            height: 100%;
+            
         }
         .popup-content img, .popup-content video {
             width: 200px; 
@@ -69,7 +72,8 @@ $theme = getTheme($conn);
     </style>
 </head>
 <body>
-    <?php include('navbar.php'); ?>
+  
+    
     
     <div id="map"></div>
     
@@ -156,14 +160,7 @@ async function getCoordinates(city) {
             .then(response => response.json())
             .then(async data => {
                 for (const marker of data) {
-                    console.log("========================== video link=============")
-                    console.log(marker.media);
-                    console.log("========================== video ID=============")
-
-                    console.log(marker.videoID);
-                    
-
-                    let coords = await getCoordinates(marker.city);
+                let coords = await getCoordinates(marker.city);
                      if (coords) {
                         let popupContent = `<div class="card" style="width: 18rem;">
         ${marker.type === "video" ? 
@@ -193,4 +190,6 @@ async function getCoordinates(city) {
             
     </script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>

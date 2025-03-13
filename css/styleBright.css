@@ -2,7 +2,10 @@
 
 /* Custom Navbar Styling */
 nav.navbar {
-    background-color: #343a40; /* Dark background color for navbar */
+    background-color: #ececec !important; /* Brighter background color for navbar */
+    color: black !important;
+    --bs-navbar-color: black !important;
+    box-shadow: 0 5px 5px black;
 }
 
 /* Adjust the search bar */
@@ -32,7 +35,7 @@ nav.navbar .nav-item {
 
 /* Navbar link hover effect */
 nav.navbar .nav-link:hover {
-    color: #f8f9fa; /* Change text color when hovering over links */
+    color: #000000 !important; /* Change text color when hovering over links */
 }
 
 /* Add active link color */
@@ -42,12 +45,16 @@ nav.navbar .nav-link.active {
 
 /* Additional adjustments for navbar items */
 nav.navbar .navbar-brand {
-    color: #fff; /* Set the color of the brand */
+    color: #000000 !important; /* Set the color of the brand */
 }
 
 /* Ensure no wrapping of navbar items */
 nav.navbar .navbar-nav .nav-item .nav-link {
     white-space: nowrap; /* Prevent text from breaking onto new lines */
+}
+
+.nav-link{
+    color: black;
 }
 
 .navbar .dropdown {
@@ -65,7 +72,7 @@ nav.navbar .navbar-nav .nav-item .nav-link {
 
 .dropdown_styling{
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 /* Dropdown menu styling */

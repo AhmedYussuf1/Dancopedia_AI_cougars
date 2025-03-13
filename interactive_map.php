@@ -6,23 +6,6 @@ session_start();
 require_once 'db_connection.php';
 include('navbar.php'); 
 
-// Get user theme from database
-function getTheme($conn) {
-    if (!isset($_SESSION['username'])) {
-        return 1; // Default theme
-    }
-    
-    $user_id = $_SESSION['user_id'];
-    $query = "SELECT theme FROM user_settings WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    return ($result->num_rows > 0) ? $result->fetch_assoc()['theme'] : 1;
-}
-
-$theme = getTheme($conn);
 ?>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,22 +15,24 @@ $theme = getTheme($conn);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Theme CSS -->
-    <link href="css/style<?= $theme == 2 ? 'Dark' : 'Light' ?>.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/navbar.css">
     <!-- Leaflet CSS & JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> 
-    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
+
         #map { 
             width: 98%;
             margin: 20px auto;
             min-height: 700px;
             height: 100%;
             
+        }
+
+        nav.navbar{
+            color: black;
         }
         .popup-content img, .popup-content video {
             width: 200px; 
@@ -70,6 +55,10 @@ $theme = getTheme($conn);
             s
         }
     </style>
+    <!-- Theme CSS -->
+    <?php
+        include('getTheme.php')
+    ?>
 </head>
 <body>
   

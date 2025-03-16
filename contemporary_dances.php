@@ -11,7 +11,7 @@ include('db_connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classical Dances</title>
+    <title>American Contemporary Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php
@@ -51,63 +51,63 @@ include('db_connection.php');
 </head>
 <body>
 
-    <!-- Classical Dances Content -->
+    <!-- American Contemporary Dances Content -->
     <div class="container main-content">
         <header class="text-center my-5">
-            <h1 class="display-3">Classical American Dances</h1>
-            <p class="lead">Explore the rich tradition of classical dance forms from the United States.</p>
+            <h1 class="display-3">American Contemporary Dances</h1>
+            <p class="lead">Discover the diverse world of American contemporary dance forms that continue to evolve.</p>
         </header>
 
         <div class="row">
-            <!-- Native American Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/native_american_dance.jpg" alt="Native American Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Native American Dance</h5>
-                        <p class="card-text">
-                            Native American dances are deeply rooted in spiritual and cultural practices. These dances are performed during ceremonies, festivals, and communal gatherings. The movements are expressive and symbolic, reflecting the connection to nature and ancestral traditions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Swing Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/swing_dance.jpg" alt="Swing Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Swing Dance</h5>
-                        <p class="card-text">
-                            Swing dance emerged in the early 20th century, particularly in Harlem, New York, during the Jazz Age. Known for its lively and energetic movements, swing dance includes variations such as the Lindy Hop, Charleston, and Jitterbug, all performed to upbeat jazz music.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Modern Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/modern_dance.jpg" alt="Modern Dance">
+                    <img src="images/contemporary/modern_dance.jpg" alt="Modern Dance">
                     <div class="card-body dance-card-body">
                         <h5 class="card-title">Modern Dance</h5>
-                        <p class="card-text">
-                            Modern dance, which emerged in the early 20th century, broke away from the traditional constraints of ballet. Pioneers like Martha Graham and Merce Cunningham used modern dance to express emotions and tell stories through experimental movements.
+                        <p class="card-text lg-4">
+                            Modern dance is a broad dance genre that emerged in the early 20th century as a response to the rigidity of ballet. It focuses on creativity, self-expression, and often uses unconventional movements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hip Hop Dance -->
+            <div class="col-md-4 d-flex">
+                <div class="card dance-card">
+                    <img src="images/contemporary/hip_hop_dance.jpg" alt="Hip Hop Dance">
+                    <div class="card-body dance-card-body">
+                        <h5 class="card-title">Hip Hop Dance</h5>
+                        <p class="card-text lg-4">
+                            Hip hop dance includes a variety of styles such as breakdancing, popping, and locking. It developed alongside hip hop music in the 1970s in New York City and has become a worldwide cultural phenomenon.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jazz Dance -->
+            <div class="col-md-4 d-flex">
+                <div class="card dance-card">
+                    <img src="images/contemporary/jazz_dance.jpg" alt="Jazz Dance">
+                    <div class="card-body dance-card-body">
+                        <h5 class="card-title">Jazz Dance</h5>
+                        <p class="card-text lg-4">
+                            Jazz dance is known for its energetic movements, improvisation, and theatrical style. It developed alongside jazz music and is often used in musical theater, contemporary performances, and pop culture.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <!-- Jazz Dance -->
-            <div class="col-md-4 d-flex">
+        <div class="row mt-4 d-flex">
+            <!-- Contemporary Ballet -->
+            <div class="col-md-4">
                 <div class="card dance-card">
-                    <img src="images/jazz_dance.jpg" alt="Jazz Dance">
+                    <img src="images/contemporary/contemporary_ballet.jpg" alt="Contemporary Ballet">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Jazz Dance</h5>
+                        <h5 class="card-title">Contemporary Ballet</h5>
                         <p class="card-text">
-                            Originating in African American communities, jazz dance blends rhythmic, energetic movements with improvisation. It gained mainstream popularity in the early 20th century, heavily influencing Broadway musicals and modern pop dance styles.
+                            Contemporary ballet blends traditional ballet techniques with modern movements. It emphasizes creativity, flexibility, and collaboration with other art forms, often incorporating contemporary music.
                         </p>
                     </div>
                 </div>
@@ -116,24 +116,24 @@ include('db_connection.php');
             <!-- Tap Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/tap_dance.jpg" alt="Tap Dance">
+                    <img src="images/contemporary/tap_dance.jpg" alt="Tap Dance">
                     <div class="card-body dance-card-body">
                         <h5 class="card-title">Tap Dance</h5>
                         <p class="card-text">
-                            Tap dance originated in the early 19th century, combining African rhythms and Irish clog dancing. Known for its unique sound created by tapping metal plates on shoes, tap dance was made famous by stars like Fred Astaire and Gene Kelly in the 20th century.
+                            Tap dance is characterized by rhythmic tapping of the feet, creating a musical rhythm. It evolved in the early 20th century, influenced by African American dance styles and European step dancing.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Clogging -->
+            <!-- Lyrical Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/clogging.jpg" alt="Clogging">
+                    <img src="images/contemporary/lyrical_dance.jpg" alt="Lyrical Dance">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Clogging</h5>
+                        <h5 class="card-title">Lyrical Dance</h5>
                         <p class="card-text">
-                            Clogging is a folk dance from the Appalachian region of the United States. It blends Irish, Scottish, and African dance styles, characterized by percussive footwork and rhythm. It is often performed to bluegrass or country music.
+                            Lyrical dance is a fusion of ballet and jazz, with an emphasis on emotional expression. Dancers perform fluid and graceful movements to music with meaningful lyrics.
                         </p>
                     </div>
                 </div>

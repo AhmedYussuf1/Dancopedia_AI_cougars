@@ -11,7 +11,7 @@ include('db_connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classical Dances</title>
+    <title>American Folk Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php
@@ -47,52 +47,53 @@ include('db_connection.php');
             font-size: 1.5rem;
             font-weight: bold;
         }
+
     </style>
 </head>
 <body>
 
-    <!-- Classical Dances Content -->
+    <!-- American Folk Dances Content -->
     <div class="container main-content">
         <header class="text-center my-5">
-            <h1 class="display-3">Classical American Dances</h1>
-            <p class="lead">Explore the rich tradition of classical dance forms from the United States.</p>
+            <h1 class="display-3">American Folk Dances</h1>
+            <p class="lead">Discover the unique and vibrant folk dance traditions from across the United States.</p>
         </header>
 
         <div class="row">
-            <!-- Native American Dance -->
+            <!-- Square Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/native_american_dance.jpg" alt="Native American Dance">
+                    <img src="images/folk/square_dance.jpg" alt="Square Dance">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Native American Dance</h5>
+                        <h5 class="card-title">Square Dance</h5>
                         <p class="card-text">
-                            Native American dances are deeply rooted in spiritual and cultural practices. These dances are performed during ceremonies, festivals, and communal gatherings. The movements are expressive and symbolic, reflecting the connection to nature and ancestral traditions.
+                            Square dance is a lively American folk dance, usually involving four couples arranged in a square. It is traditionally performed to folk music and is known for its choreographed steps and patterns.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Swing Dance -->
+            <!-- Appalachian Clog Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/swing_dance.jpg" alt="Swing Dance">
+                    <img src="images/folk/appalachian_clog.jpg" alt="Appalachian Clog Dance">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Swing Dance</h5>
+                        <h5 class="card-title">Appalachian Clog Dance</h5>
                         <p class="card-text">
-                            Swing dance emerged in the early 20th century, particularly in Harlem, New York, during the Jazz Age. Known for its lively and energetic movements, swing dance includes variations such as the Lindy Hop, Charleston, and Jitterbug, all performed to upbeat jazz music.
+                            The Appalachian clog dance is a high-energy percussive dance style from the Appalachian region. It combines rhythmic foot stomping and fast movements, often performed to old-time and bluegrass music.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Modern Dance -->
+            <!-- Cajun Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/modern_dance.jpg" alt="Modern Dance">
+                    <img src="images/folk/cajun_dance.jpg" alt="Cajun Dance">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Modern Dance</h5>
+                        <h5 class="card-title">Cajun Dance</h5>
                         <p class="card-text">
-                            Modern dance, which emerged in the early 20th century, broke away from the traditional constraints of ballet. Pioneers like Martha Graham and Merce Cunningham used modern dance to express emotions and tell stories through experimental movements.
+                            Cajun dance is a lively and intimate dance style from the southern Louisiana region. It’s typically done to Cajun or Zydeco music and features close partner dancing with fast-paced footwork and twirls.
                         </p>
                     </div>
                 </div>
@@ -100,40 +101,40 @@ include('db_connection.php');
         </div>
 
         <div class="row mt-4">
-            <!-- Jazz Dance -->
+            <!-- Contra Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/jazz_dance.jpg" alt="Jazz Dance">
+                    <img src="images/folk/contra_dance.jpg" alt="Contra Dance">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Jazz Dance</h5>
+                        <h5 class="card-title">Contra Dance</h5>
                         <p class="card-text">
-                            Originating in African American communities, jazz dance blends rhythmic, energetic movements with improvisation. It gained mainstream popularity in the early 20th century, heavily influencing Broadway musicals and modern pop dance styles.
+                            Contra dance is a social folk dance where couples dance in two facing lines. This American tradition features lively, simple, and easy-to-follow steps, often danced to live folk music.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Tap Dance -->
+            <!-- Native American Powwow Dance -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/tap_dance.jpg" alt="Tap Dance">
+                    <img src="images/folk/powwow_dance.jpg" alt="Native American Powwow Dance">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Tap Dance</h5>
+                        <h5 class="card-title">Native American Powwow Dance</h5>
                         <p class="card-text">
-                            Tap dance originated in the early 19th century, combining African rhythms and Irish clog dancing. Known for its unique sound created by tapping metal plates on shoes, tap dance was made famous by stars like Fred Astaire and Gene Kelly in the 20th century.
+                            Powwow dancing is a traditional dance performed during Native American powwows. Each style represents different tribes and traditions, including the graceful Grass Dance and powerful Men's Traditional Dance.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Clogging -->
+            <!-- Texas Two-Step -->
             <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/clogging.jpg" alt="Clogging">
+                    <img src="images/folk/texas_two_step.jpg" alt="Texas Two-Step">
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Clogging</h5>
+                        <h5 class="card-title">Texas Two-Step</h5>
                         <p class="card-text">
-                            Clogging is a folk dance from the Appalachian region of the United States. It blends Irish, Scottish, and African dance styles, characterized by percussive footwork and rhythm. It is often performed to bluegrass or country music.
+                            The Texas Two-Step is a popular partner dance that originated in Texas and is commonly danced to country-western music. It consists of quick steps and smooth movements and is a staple in country dance halls.
                         </p>
                     </div>
                 </div>

@@ -7,20 +7,8 @@ if (!isset($_SESSION)) {
 // Set your OpenAI API key here
 define('OPENAI_API_KEY', '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');  // Replace with your actual OpenAI API key
 
-// Database connection details
-$servername = "localhost";
-$username = "root";  // Replace with your DB username
-$password = "ics311";  // Replace with your DB password
-$dbname = "dance_ai_db";  // Replace with your DB name
-$port = 3307;  // Assuming this is your MySQL port for XAMPP
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Database connection
+include('db_connection.php');
 
 // Function to send request to OpenAI API and get chatbot's response
 function getChatbotResponse($userMessage) {

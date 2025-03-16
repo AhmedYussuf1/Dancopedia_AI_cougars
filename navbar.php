@@ -55,7 +55,7 @@
 
                 <!-- Search Bar -->
                 <li class="nav-item search-bar">
-                    <input type="text" id="search-bar" class="form-control" placeholder="Search for dances..." onkeyup="searchDances()">
+                    <input type="text" id="search-bar" class="form-control" placeholder="Search for dances..." onkeyup="filterDances()">
                 </li>
 
                 <?php if (isset($_SESSION['username'])): ?>

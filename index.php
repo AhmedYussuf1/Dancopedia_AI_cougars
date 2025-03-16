@@ -9,9 +9,6 @@ include('db_connection.php');
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
 $result = $conn->query($sql);
- 
-
- 
 ?>
 
 <!-- Add Favicon -->
@@ -57,6 +54,12 @@ $result = $conn->query($sql);
                 </div>
             </div>
         </div>
+		
+		<div class="container mt-3">
+			<div id="search-results" class="row">
+			<!-- Search results will appear here dynamically -->
+			</div>
+		</div>
 
         <section class="about-section">
             <div class="container">
@@ -172,24 +175,27 @@ $result = $conn->query($sql);
         });
 
         // Search function
-        function searchDances() {
-            let query = document.getElementById('search-bar').value;
-            if (query) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'search.php',  // Create this PHP file to fetch filtered data
-                    data: { search: query },
-                    success: function(response) {
-                        $('#dance-list').html(response);  // Update the dance table
-                    },
-                    error: function() {
-                        alert('Error occurred while searching');
-                    }
-                });
-            } else {
-                alert('Please enter a search query.');
-            }
-        }
+        function filterDances() {
+			const query = document.getElementById('search-bar').value.trim();
+
+			if (query) {
+				$.ajax({
+					type: 'GET',
+					url: 'search.php', // This points to the backend search file
+					data: { query: query },
+					success: function(response) {
+						const resultsContainer = document.getElementById('search-results');
+						resultsContainer.innerHTML = response; // Display results dynamically
+					},
+					error: function() {
+						alert('Error occurred while searching.');
+					}
+				});
+			} else {
+				// Clear results if search bar is empty
+				document.getElementById('search-results').innerHTML = '';
+			}
+		}
     </script>
 
 </body>
@@ -198,5 +204,4 @@ $result = $conn->query($sql);
 <?php
 $conn->close();
 ?>
-
 

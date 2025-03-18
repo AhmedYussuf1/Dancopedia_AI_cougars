@@ -4,6 +4,14 @@ session_start();
 include('navbar.php');
 // Database connection
 include('db_connection.php');
+include('getTheme.php');
+ // Query to get  from dance table with genre name Classical
+ $sql = "SELECT * FROM `dances` WHERE  genre='Hiphop'";  // Ensure this matches your table and column names
+ $result = $conn->query($sql);
+
+ 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -16,26 +24,14 @@ include('db_connection.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- exacted css style for folk_dance.php -->
     <link rel="stylesheet" href="css/folk_dance.css">
-    <?php
-        include('getTheme.php')
-    ?>
+    < 
      
    
 </head>
 <body>
 
-    <!-- American Folk Dances Content -->
-     //request dance data from the database with title name flock_dances    
-    <?php
-    // Query to get  from dance table with genre name Classical
-    $sql = "SELECT * FROM `dances` WHERE  genre='Hip Hop'";  // Ensure this matches your table and column names
-    $result = $conn->query($sql);
-
-    
-
- 
-    ?>
-    //display the dance data in a card format
+   
+    <!-- //display the dance data in a card format -->
     <div class="container main-content">
         <header class="text-center my-5">
             <h1 class="display-3">American Folk Dances</h1>
@@ -80,7 +76,9 @@ include('db_connection.php');
             ?>
         </div>
     </div>          
-
+  <?php
+    include('footer.php');
+    ?>
          
 
     <!-- Bootstrap JS and dependencies -->

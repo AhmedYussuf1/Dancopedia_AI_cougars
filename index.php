@@ -191,12 +191,17 @@ $result = $conn->query($sql);
             }
         }
     </script>
+  <?php
+    // Include the footer content
+    include('footer.php');
+    ?>
 
 </body>
 </html>
 
 <?php
 $conn->close();
+
 ?>
 
 

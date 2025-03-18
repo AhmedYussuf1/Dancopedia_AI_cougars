@@ -14,133 +14,74 @@ include('db_connection.php');
     <title>American Folk Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- exacted css style for folk_dance.php -->
+    <link rel="stylesheet" href="css/folk_dance.css">
     <?php
         include('getTheme.php')
     ?>
-    <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-
-        .main-content {
-            margin-top: 30px;
-        }
-
-        .dance-card {
-            border: 1px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .dance-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .dance-card-body {
-            padding: 20px;
-        }
-
-        .dance-card-body h5 {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-    </style>
+     
+   
 </head>
 <body>
 
     <!-- American Folk Dances Content -->
+     //request dance data from the database with title name flock_dances    
+    <?php
+    // Query to get  from dance table with genre name Classical
+    $sql = "SELECT * FROM `dances` WHERE  genre='Hip Hop'";  // Ensure this matches your table and column names
+    $result = $conn->query($sql);
+
+    
+
+ 
+    ?>
+    //display the dance data in a card format
     <div class="container main-content">
         <header class="text-center my-5">
             <h1 class="display-3">American Folk Dances</h1>
             <p class="lead">Discover the unique and vibrant folk dance traditions from across the United States.</p>
         </header>
-
         <div class="row">
             <!-- Square Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/folk/square_dance.jpg" alt="Square Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Square Dance</h5>
-                        <p class="card-text">
-                            Square dance is a lively American folk dance, usually involving four couples arranged in a square. It is traditionally performed to folk music and is known for its choreographed steps and patterns.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <?php
 
-            <!-- Appalachian Clog Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/folk/appalachian_clog.jpg" alt="Appalachian Clog Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Appalachian Clog Dance</h5>
-                        <p class="card-text">
-                            The Appalachian clog dance is a high-energy percussive dance style from the Appalachian region. It combines rhythmic foot stomping and fast movements, often performed to old-time and bluegrass music.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            if ($result->num_rows > 0) {
+                // output data of each row
+               
+                while($row = $result->fetch_assoc()) {
+                    
+                    $videoURL = $row['video_url']; // Assuming your database has a column for video URLs
+                    $videoName = $row['name']; // Video name
+                    $videoGenre = $row['genre']; // Genre
+                    $videoRegion = $row['region']; // Region
 
-            <!-- Cajun Dance -->
-            <div class="col-md-4 d-flex">
+                    // Extract YouTube video ID from URL
+                    preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/[^\n\s]+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoURL, $matches);
+                    $videoID = $matches[1]; // YouTube video ID
+
+                    echo '    <div class="col-md-4 d-flex">
                 <div class="card dance-card">
-                    <img src="images/folk/cajun_dance.jpg" alt="Cajun Dance">
+                  <iframe width="100%" height="215" src="https://www.youtube.com/embed/' . $videoID . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div class="card-body dance-card-body">
-                        <h5 class="card-title">Cajun Dance</h5>
-                        <p class="card-text">
-                            Cajun dance is a lively and intimate dance style from the southern Louisiana region. It’s typically done to Cajun or Zydeco music and features close partner dancing with fast-paced footwork and twirls.
-                        </p>
+                        <h5 class="card-title
+                        ">' . $row['name'] . '</h5>
+                        <p class="card-text">Genre: ' . $row['genre'] . '</p>
+                        <p class="card-text">Region: ' . $row['region'] . '</p>
+                        <p class="card-text">Description: ' . $row['description'] . '</p>
+                   
                     </div>
                 </div>
-            </div>
+            </div>';
+                }
+            } else {
+                echo "0 results";
+            }
+            $conn->close();
+            ?>
         </div>
+    </div>          
 
-        <div class="row mt-4">
-            <!-- Contra Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/folk/contra_dance.jpg" alt="Contra Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Contra Dance</h5>
-                        <p class="card-text">
-                            Contra dance is a social folk dance where couples dance in two facing lines. This American tradition features lively, simple, and easy-to-follow steps, often danced to live folk music.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Native American Powwow Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/folk/powwow_dance.jpg" alt="Native American Powwow Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Native American Powwow Dance</h5>
-                        <p class="card-text">
-                            Powwow dancing is a traditional dance performed during Native American powwows. Each style represents different tribes and traditions, including the graceful Grass Dance and powerful Men's Traditional Dance.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Texas Two-Step -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/folk/texas_two_step.jpg" alt="Texas Two-Step">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Texas Two-Step</h5>
-                        <p class="card-text">
-                            The Texas Two-Step is a popular partner dance that originated in Texas and is commonly danced to country-western music. It consists of quick steps and smooth movements and is a staple in country dance halls.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+         
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,7 +1,8 @@
 <?php 
 // Start session to track user login status
 session_start();
-
+//Navbar
+include('navbar.php');
 // Database connection
 include('db_connection.php');
 
@@ -9,22 +10,7 @@ include('db_connection.php');
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
 $result = $conn->query($sql);
  
-function getTheme() {
-    global $conn;  // Access the global $conn variable
-    if (isset($_SESSION['username'])) {
-        $user_id = $_SESSION['user_id'];
-        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
-        $themeResult = $conn->query($themeQuery);
-        if ($themeResult->num_rows > 0) {
-            $row = $themeResult->fetch_assoc();
-            return $row['theme'];
-        } else {
-            return 1;  // Default theme if no result found
-        }
-    } else {
-        return 1;  // Default theme if user not logged in
-    }
-}
+
  
 ?>
 
@@ -42,19 +28,12 @@ function getTheme() {
     <!-- FontAwesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <?php
-        $setTheme = getTheme();
-        if($setTheme == 1){
-            echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
-        }
-        elseif ($setTheme == 2){
-            echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
-        }
+        include('getTheme.php')
     ?>
     
 </head>
 <body>
-     <!-- Navbar -->
-    <?php include('navbar.php'); ?>
+
 
     <!-- Home Page Content -->
     <div class="main-content">
@@ -147,8 +126,8 @@ function getTheme() {
                 <label id="message-input" for="msg"><b>Message</b></label>
                 <textarea placeholder="Type your message..." name="input" class="chatbox-text-area" required></textarea>
 
-                <button id="chat-submit" type="submit" class="btn">Send <i class="fa-regular fa-paper-plane"></i></button>
-                <button type="button" class="btn cancel" onclick="closeChatBox()">Close <i class="fa-regular fa-rectangle-xmark"></i></button>
+                <button id="chat-submit" type="submit" class="send_button">Send <i class="fa-regular fa-paper-plane"></i></button>
+                <button type="button" class="send_button cancel" onclick="closeChatBox()">Close <i class="fa-regular fa-rectangle-xmark"></i></button>
             </form>
         </div>
     </div>

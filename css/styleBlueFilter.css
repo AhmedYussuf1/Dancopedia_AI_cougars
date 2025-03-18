@@ -98,6 +98,7 @@ html, body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    filter: brightness(80%) sepia(20%) hue-rotate(190deg) saturate(70%);
 }
 
 /* Main container should take all available space except the footer */
@@ -269,6 +270,7 @@ textarea:focus {
 
 .btn {
     border-radius: 5px;
+    background-color: #4CAF50;
     color: white;
     padding: 8px 15px;
     border: none;

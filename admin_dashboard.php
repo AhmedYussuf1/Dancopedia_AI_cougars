@@ -1,7 +1,8 @@
 <?php
 session_start();
 include('db_connection.php');  // Include your database connection
-
+// Navbar
+include('navbar.php');
 // Ensure that the user is logged in and is an admin
 if (!isset($_SESSION['username']) || $_SESSION['role'] != 'admin') {
     header("Location: login.php");  // Redirect to login page if not logged in or not an admin
@@ -17,22 +18,7 @@ $dancesQuery = $conn->query("SELECT * FROM dances");
 // Fetch users data
 $usersQuery = $conn->query("SELECT * FROM users");
 
-function getTheme() {
-    global $conn;  // Access the global $conn variable
-    if (isset($_SESSION['username'])) {
-        $user_id = $_SESSION['user_id'];
-        $themeQuery = "SELECT theme FROM user_settings WHERE user_id = $user_id";
-        $themeResult = $conn->query($themeQuery);
-        if ($themeResult->num_rows > 0) {
-            $row = $themeResult->fetch_assoc();
-            return $row['theme'];
-        } else {
-            return 1;  // Default theme if no result found
-        }
-    } else {
-        return 1;  // Default theme if user not logged in
-    }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,19 +29,10 @@ function getTheme() {
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php
-    $setTheme = getTheme();
-    if($setTheme == 1){
-        echo ' <link href="css/styleLight.css" rel="stylesheet"> ';
-    }
-    elseif ($setTheme == 2){
-        echo ' <link href="css/styleDark.css" rel="stylesheet"> ';
-    }
+        include('getTheme.php')
     ?>
 </head>
 <body>
-
-    <!-- Include the navbar -->
-    <?php include('navbar.php'); ?>
 
     <!-- Admin Content -->
     <div class="container mt-5">
@@ -143,6 +120,39 @@ function getTheme() {
                         </td>
                     </tr>
                 <?php } ?>
+            </tbody>
+        </table>
+
+        <!-- Feedback Section -->
+        <h2>Feedback</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Feedback ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Submitted On</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            include 'db_connection.php';
+            $feedback_result = mysqli_query($conn, "SELECT * FROM feedback ORDER BY created_at DESC");
+
+            while ($row = mysqli_fetch_assoc($feedback_result)) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['email']); ?></td>
+                    <td><?php echo htmlspecialchars($row['message']); ?></td>
+                    <td><?php echo $row['created_at']; ?></td>
+                    <td>
+                        <a href="delete_feedback.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this feedback?')">Delete</a>
+                    </td>
+                </tr>
+            <?php } ?>
             </tbody>
         </table>
     </div>

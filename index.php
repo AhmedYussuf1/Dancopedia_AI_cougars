@@ -1,4 +1,4 @@
-<?php 
+<?php  
 // Start session to track user login status
 session_start();
 //Navbar
@@ -9,9 +9,6 @@ include('db_connection.php');
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
 $result = $conn->query($sql);
- 
-
- 
 ?>
 
 <!-- Add Favicon -->
@@ -30,10 +27,8 @@ $result = $conn->query($sql);
     <?php
         include('getTheme.php')
     ?>
-    
 </head>
 <body>
-
 
     <!-- Home Page Content -->
     <div class="main-content">
@@ -80,14 +75,19 @@ $result = $conn->query($sql);
         <!-- Video Gallery -->
         <div class="row">
             <?php
+            // Default video URL if none is provided
+            $defaultVideoURL = 'https://youtu.be/vwGp16NXgQU?si=l8Iv3scmhUbsCGpb'; // Your provided default video URL
+
             // Fetch dance videos from the database
             if ($result->num_rows > 0) {
                 // Output data of each row
                 while ($row = $result->fetch_assoc()) {
-                    $videoURL = $row['video_url']; // Assuming your database has a column for video URLs
+                    // Get the video URL, or set to default if empty
+                    $videoURL = !empty($row['video_url']) ? $row['video_url'] : $defaultVideoURL;
                     $videoName = $row['name']; // Video name
                     $videoGenre = $row['genre']; // Genre
                     $videoRegion = $row['region']; // Region
+                    $videoDescription = $row['description']; // Dance description
 
                     // Extract YouTube video ID from URL
                     preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/[^\n\s]+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoURL, $matches);
@@ -100,6 +100,7 @@ $result = $conn->query($sql);
                     echo '            <h5 class="card-title">' . $videoName . '</h5>';
                     echo '            <p class="card-text">Genre: ' . $videoGenre . '</p>';
                     echo '            <p class="card-text">Region: ' . $videoRegion . '</p>';
+                    echo '            <p class="card-text"><strong>Description:</strong> ' . $videoDescription . '</p>'; // Added Description
                     echo '        </div>';
                     echo '    </div>';
                     echo '</div>';
@@ -191,17 +192,10 @@ $result = $conn->query($sql);
             }
         }
     </script>
-  <?php
-    // Include the footer content
-    include('footer.php');
-    ?>
 
 </body>
 </html>
 
 <?php
 $conn->close();
-
 ?>
-
-

@@ -23,10 +23,5 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
     <a href="admin_dashboard.php">Go to Admin Dashboard</a>
     <a href="logout.php">Logout</a>
-    <?php
-    // Include the footer content
-    include('footer.php');
-    ?>
-
 </body>
 </html>

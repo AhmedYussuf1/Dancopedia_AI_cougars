@@ -12,7 +12,7 @@ $dances = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $dances[] = [
-            "city" => $row["city"],
+            "city" => $row["city"],  // Use 'region' as the city
             "type" => !empty($row["video_url"]) ? "video" : "image",
             "media" => !empty($row["video_url"]) ? $row["video_url"] : $row["image_url"],
             "link" => $row["link"],

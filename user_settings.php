@@ -257,5 +257,8 @@ if(isset($_POST['account_delete_button'])) {
 
 
 </body>
+<?php
+    include('footer.php');
+    ?>
 
 </html>

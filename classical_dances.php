@@ -4,6 +4,14 @@ session_start();
 include('navbar.php');
 // Database connection
 include('db_connection.php');
+include('getTheme.php');
+require_once('utility_functions/display_result.php');
+ // Query to get  from dance table with genre name Classical
+ $sql = "SELECT * FROM `dances` WHERE  genre='Classical'  ";  // Ensure this matches your table and column names
+ $result = $conn->query($sql);
+ 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -11,135 +19,36 @@ include('db_connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classical Dances</title>
+    <title>American Folk Dances</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <?php
-        include('getTheme.php')
-    ?>
-    <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-
-        .main-content {
-            margin-top: 30px;
-        }
-
-        .dance-card {
-            border: 1px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .dance-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .dance-card-body {
-            padding: 20px;
-        }
-
-        .dance-card-body h5 {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-    </style>
+    <!-- exacted css style for folk_dance.php -->
+    <link rel="stylesheet" href="css/folk_dance.css">
+    < 
+     
+   
 </head>
 <body>
 
-    <!-- Classical Dances Content -->
+   
+    <!-- //display the dance data in a card format -->
     <div class="container main-content">
         <header class="text-center my-5">
-            <h1 class="display-3">Classical American Dances</h1>
-            <p class="lead">Explore the rich tradition of classical dance forms from the United States.</p>
+            <h1 class="display-3">American Folk Dances</h1>
+            <p class="lead">Discover the unique and vibrant folk dance traditions from across the United States.</p>
         </header>
-
         <div class="row">
-            <!-- Native American Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/native_american_dance.jpg" alt="Native American Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Native American Dance</h5>
-                        <p class="card-text">
-                            Native American dances are deeply rooted in spiritual and cultural practices. These dances are performed during ceremonies, festivals, and communal gatherings. The movements are expressive and symbolic, reflecting the connection to nature and ancestral traditions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Swing Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/swing_dance.jpg" alt="Swing Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Swing Dance</h5>
-                        <p class="card-text">
-                            Swing dance emerged in the early 20th century, particularly in Harlem, New York, during the Jazz Age. Known for its lively and energetic movements, swing dance includes variations such as the Lindy Hop, Charleston, and Jitterbug, all performed to upbeat jazz music.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modern Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/modern_dance.jpg" alt="Modern Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Modern Dance</h5>
-                        <p class="card-text">
-                            Modern dance, which emerged in the early 20th century, broke away from the traditional constraints of ballet. Pioneers like Martha Graham and Merce Cunningham used modern dance to express emotions and tell stories through experimental movements.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <?php
+        // Display the dance cards
+        displayDanceCard($result,"");
+            $conn->close();
+            ?>
         </div>
-
-        <div class="row mt-4">
-            <!-- Jazz Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/jazz_dance.jpg" alt="Jazz Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Jazz Dance</h5>
-                        <p class="card-text">
-                            Originating in African American communities, jazz dance blends rhythmic, energetic movements with improvisation. It gained mainstream popularity in the early 20th century, heavily influencing Broadway musicals and modern pop dance styles.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tap Dance -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/tap_dance.jpg" alt="Tap Dance">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Tap Dance</h5>
-                        <p class="card-text">
-                            Tap dance originated in the early 19th century, combining African rhythms and Irish clog dancing. Known for its unique sound created by tapping metal plates on shoes, tap dance was made famous by stars like Fred Astaire and Gene Kelly in the 20th century.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Clogging -->
-            <div class="col-md-4 d-flex">
-                <div class="card dance-card">
-                    <img src="images/clogging.jpg" alt="Clogging">
-                    <div class="card-body dance-card-body">
-                        <h5 class="card-title">Clogging</h5>
-                        <p class="card-text">
-                            Clogging is a folk dance from the Appalachian region of the United States. It blends Irish, Scottish, and African dance styles, characterized by percussive footwork and rhythm. It is often performed to bluegrass or country music.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>          
+  <?php
+    include('footer.php');
+    ?>
+         
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

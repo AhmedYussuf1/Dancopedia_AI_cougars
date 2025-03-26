@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 // Include the navbar (which already contains session_start())
@@ -7,8 +8,8 @@ include('db_connection.php');
 include('getTheme.php');
 require_once('utility_functions/display_result.php');
  // Query to get  from dance table with genre name Classical
- $sql = "SELECT * FROM `dances` WHERE  genre='folk'  ";  // Ensure this matches your table and column names
- $result = $conn->query($sql);
+ $sql = "SELECT * FROM `dances` WHERE  genre='folk dance'  ";  // Ensure this matches your table and column names
+$result = $conn->query($sql);
  
 
 
@@ -40,7 +41,7 @@ require_once('utility_functions/display_result.php');
         <div class="row">
         <?php
         // Display the dance cards
-        displayDanceCard($result);
+        displayDanceCard($result,"");
             $conn->close();
             ?>
         </div>

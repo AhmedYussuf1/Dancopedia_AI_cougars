@@ -11,6 +11,7 @@ function displayDanceCard($result,$defaultVideoURL) {
             $videoGenre = $row['genre']; // Genre
             $videoRegion = $row['region']; // Region
             $videoDescription = $row['description']; // Dance description
+            $videoNum = $row['dance_id'];
 
             // Extract YouTube video ID from URL
             preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/[^\n\s]+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoURL, $matches);
@@ -24,6 +25,7 @@ function displayDanceCard($result,$defaultVideoURL) {
             echo '            <p class="card-text">Genre: ' . $videoGenre . '</p>';
             echo '            <p class="card-text">Region: ' . $videoRegion . '</p>';
             echo '            <p class="card-text"><strong>Description:</strong> ' . $videoDescription . '</p>'; // Added Description
+            echo '            <a href="dance_view.php?video_id=' . $videoNum . '"><button type="button">View Dance</button></a>';
             echo '        </div>';
             echo '    </div>';
             echo '</div>';

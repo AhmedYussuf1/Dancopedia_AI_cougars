@@ -81,7 +81,7 @@ $result = $conn->query($sql);
             // Default video URL if none is provided
             $defaultVideoURL = 'https://youtu.be/vwGp16NXgQU?si=l8Iv3scmhUbsCGpb'; // Your provided default video URL
  
- displayDanceCard($result ,  $defaultVideoURL) ;
+        displayDanceCard($result ,  $defaultVideoURL) ;
  ?>   
         </div>
     </div>

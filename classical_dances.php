@@ -18,7 +18,7 @@
     include('db_connection.php');
     include('getTheme.php');
     // Query to get  from dance table with genre name Classical
-    $sql = "SELECT * FROM `dances` WHERE  genre='class' or genre='Class' or genre='Classical'   ";  // Ensure this matches your table and column names
+    $sql = "SELECT * FROM `dances` WHERE   genre='Hip-hop'   ";  // Ensure this matches your table and column names
     $result = $conn->query($sql);
 
 ?>
@@ -95,7 +95,8 @@
     </script>
     <?php
     // Include the footer content
-   displayDanceCard($result);
+    displayDanceCard($result ,  "") ;
+
     include('footer.php');
     ?>
 </body>

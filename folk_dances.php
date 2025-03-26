@@ -5,7 +5,6 @@ session_start();
 include('navbar.php');
 // Database connection
 include('db_connection.php');
-include('getTheme.php');
 require_once('utility_functions/display_result.php');
  // Query to get  from dance table with genre name Classical
  $sql = "SELECT * FROM `dances` WHERE  genre='folk dance'  ";  // Ensure this matches your table and column names
@@ -25,9 +24,7 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- exacted css style for folk_dance.php -->
     <link rel="stylesheet" href="css/folk_dance.css">
-    < 
-     
-   
+    <?php include('getTheme.php');?>
 </head>
 <body>
 

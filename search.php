@@ -6,36 +6,28 @@ session_start();
 include('db_connection.php');
 
 // Get the search query
-$searchQuery = isset($_GET['query']) ? trim($_GET['query']) : '';
+$query = isset($_GET['query']) ? $conn->real_escape_string($_GET['query']) : '';
 
-// Prepare the SQL query
-$sql = "SELECT * FROM dances WHERE name LIKE ? OR description LIKE ?";
-$stmt = $conn->prepare($sql);
-
-// Use wildcards for partial matches
-$searchTerm = "%$searchQuery%";
-$stmt->bind_param("ss", $searchTerm, $searchTerm);
-
-// Execute the query
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Display the results
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo '<div class="col-md-4 mb-4">';
-        echo '    <div class="card">';
-        echo '        <h5 class="card-title">' . htmlspecialchars($row['name']) . '</h5>';
-        echo '        <p>' . htmlspecialchars($row['description']) . '</p>';
-        echo '    </div>';
-        echo '</div>';
-    }
+if (!empty($query)) {
+    // Match any record where * contains the query letters or numbers
+    $sql = "SELECT name link FROM dances WHERE name LIKE '%$query%'";
 } else {
-    echo '<p class="text-center">No results found for: "' . htmlspecialchars($searchQuery) . '"</p>';
+    // Optional: Fetch all records if no query is provided
+    $sql = "SELECT name link FROM dances";
 }
 
-// Close the statement and connection
-$stmt->close();
+$result = $conn->query($sql);
+
+$searchResults = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $searchResults[] = $row;
+    }
+}
+
+// Return results in JSON format
+echo json_encode($searchResults);
+
 $conn->close();
 ?>
 

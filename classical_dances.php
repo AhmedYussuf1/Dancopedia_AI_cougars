@@ -34,7 +34,7 @@ require_once('utility_functions/display_result.php');
     <div class="container main-content">
         <header class="text-center my-5">
             <h1 class="display-3">American Classical Dances</h1>
-            <p class="lead">Discover the unique and vibrant folk dance traditions from across the United States.</p>
+            <p class="lead">Discover the unique and vibrant classical dance traditions from across the United States.</p>
         </header>
         <div class="row">
         <?php

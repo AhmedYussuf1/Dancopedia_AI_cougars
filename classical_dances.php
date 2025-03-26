@@ -41,6 +41,7 @@ require_once('utility_functions/display_result.php');
         <?php
         // Display the dance cards
         displayDanceCard($result,"");
+ 
             $conn->close();
             ?>
         </div>

@@ -15,7 +15,7 @@ function getVideoLink($conn){
             $videoURL = $row["video_url"];
             preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/[^\n\s]+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoURL, $matches);
             $videoID = $matches[1]; // YouTube video ID
-            return "https://www.youtube.com/embed/' . $videoID . '";
+            return "https://www.youtube.com/embed/$videoID";
         }
         else{
             echo 'No video ID found.';
@@ -94,7 +94,7 @@ function getTitle($conn){
     <?php include('getTheme.php');?>
 </head>
 <body>
-<div class="container d-xxl-flex justify-content-xxl-center" style="height: 60vh; width: 80vw;"><iframe width="100%" height="100%" src="<?php echo getVideoLink($conn);?>" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen=""></iframe></iframe></div>
+<div class="container d-xxl-flex justify-content-xxl-center" style="height: 60vh; width: 80vw;"><iframe width="100%" height="100%" src="<?php echo getVideoLink($conn);?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></iframe></div>
 <div class="container d-xxl-flex justify-content-xxl-center"><h1>Description:</h1></div>
 <div class="container d-xxl-flex justify-content-xxl-center"><h2><?php echo getDescription($conn);?></h2></div>
 <div class="container d-xxl-flex justify-content-xxl-center"><h1><?php echo getRegion($conn);?></h1></div>

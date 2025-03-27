@@ -53,6 +53,12 @@ $result = $conn->query($sql);
                 </div>
             </div>
         </div>
+		
+		<div class="container mt-3">
+			<div id="search-results" class="row">
+			<!-- Search results will appear here dynamically -->
+			</div>
+		</div>
 
         <section class="about-section">
             <div class="container">
@@ -144,6 +150,29 @@ $result = $conn->query($sql);
             }
         });
 
+        // Search function
+        function filterDances() {
+			const query = document.getElementById('search-bar').value.trim();
+
+			if (query) {
+				$.ajax({
+					type: 'GET',
+					url: 'search.php', // This points to the backend search file
+					data: { query: query },
+					success: function(response) {
+						const resultsContainer = document.getElementById('search-results');
+						resultsContainer.innerHTML = response; // Display results dynamically
+					},
+					error: function() {
+						alert('Error occurred while searching.');
+					}
+				});
+			} else {
+				// Clear results if search bar is empty
+				document.getElementById('search-results').innerHTML = '';
+			}
+		}
+
         // Filter Dances by Name, Genre, and Region
         function filterDances() {
             var nameSearch = $('#search-name').val().toLowerCase();
@@ -162,6 +191,7 @@ $result = $conn->query($sql);
                 }
             });
         }
+
     </script>
 
 </body>

@@ -63,7 +63,7 @@ The project addresses the lack of a centralized, accessible, and engaging platfo
 - **Project Lead:** Jane Doe  
 - **Backend Development:** Corey Klooz
 - **Frontend Development:** Ahmed Yussuf
-- **Database Design:** Tue
+- **Database Design:** Tu
 - **UI/UX Design:** Yared
 - **Content Creation:** Mou
 - **Testing and QA:** David Lee  

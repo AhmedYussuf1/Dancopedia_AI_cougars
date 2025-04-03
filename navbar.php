@@ -59,9 +59,7 @@
                     <input type="text" id="search-bar" class="form-control" placeholder="Search for dances..." onkeyup="searchDances()">
                     <div id="search-results" class="dropdown-menu"></div>
                 </li>
-					<input type="text" id="search-bar" class="form-control" placeholder="Search for dances..." onkeyup="searchDances()">
-					<div id="search-results" class="dropdown-menu"></div>
-				</li>
+					 
 
                 <?php if (isset($_SESSION['username'])): ?>
                     <li class="nav-item">

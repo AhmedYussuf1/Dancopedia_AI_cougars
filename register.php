@@ -61,10 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (insertUserSettings($user_id, $conn)) {
                 echo "User settings added successfully!";
             } else {
-                echo "Failed to add user settings.";
+                error_log("Failed to add user settings.");
             }
         } else {
-            echo "Failed to fetch user_id.";
+            error_log("Failed to fetch user_id.");
         }
 
         header("Location: login.php");

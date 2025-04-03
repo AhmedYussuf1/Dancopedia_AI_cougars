@@ -19,8 +19,8 @@ include('navbar.php');
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/navbar.css">
     <!-- Leaflet CSS & JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
 
         #map { 
@@ -31,9 +31,6 @@ include('navbar.php');
             
         }
 
-        nav.navbar{
-            color: black;
-        }
         .popup-content img, .popup-content video {
             width: 200px; 
             height: auto;
@@ -65,15 +62,16 @@ include('navbar.php');
     
     
     <div id="map"></div>
-
+    
+    
     <script>
   // Initialize the map and set default view
 var map = L.map('map').setView([37.0902, -95.7129], 4); // Centered on the U.S. with zoom level 4
-
+ 
 // Add OpenStreetMap tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
-
+  
 }).addTo(map);
 
 // Define the bounding box for the United States (latitude/longitude limits)
@@ -90,8 +88,8 @@ map.setMinZoom(4);
 // Prevent users from panning outside the boundaries
 map.on('drag', function() {
     map.panInsideBounds(usaBounds, { animate: false });
-
-
+   
+    
 });
 /**********************************************************************************************************
  * Function to fetch coordinates from city name using Nominatim API with caching                         *
@@ -106,12 +104,12 @@ async function getCoordinates(city) {
     let url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
 
     /**********************************************************************************************************
-     * The fetch() method is used to request a resource from the network.                                     *
-     * It returns a promise that resolves to the Response to that request, whether it is successful or not.   *
+     * The fetch() method is used to request a resource from the network.                                     *       
+     * It returns a promise that resolves to the Response to that request, whether it is successful or not.   *           
      * You can also opt to return the data in JSON format by calling the json() method on the response.       *
-     * The then() method is used to execute a function after the promise is resolved (or rejected).           *
-     * The function receives the response from the fetch request.                                             *
-     * The catch() method is used to handle any errors that may have occurred during the fetch request.       *
+     * The then() method is used to execute a function after the promise is resolved (or rejected).           *       
+     * The function receives the response from the fetch request.                                             *           
+     * The catch() method is used to handle any errors that may have occurred during the fetch request.       *   
      ***********************************************************************************************************/
 
     return new Promise((resolve, reject) => {
@@ -132,15 +130,15 @@ async function getCoordinates(city) {
                 resolve(null);
             });
     });
-
+    
 }
 
 /************************************************************************************************************
  * The fetch() method is used to request a resource from the network.                                       *
- * It returns a promise that resolves to the Response to that request, whether it is successful or not.     *
+ * It returns a promise that resolves to the Response to that request, whether it is successful or not.     * 
  * You can also opt to return the data in JSON format by calling the json() method on the response.         *
- * The then() method is used to execute a function after the promise is resolved (or rejected).             *
- * The function receives the response from the fetch request.                                               *
+ * The then() method is used to execute a function after the promise is resolved (or rejected).             *       
+ * The function receives the response from the fetch request.                                               *             
  * The catch() method is used to handle any errors that may have occurred during the fetch request.         *
  ************************************************************************************************************/
 
@@ -151,17 +149,20 @@ async function getCoordinates(city) {
                 let coords = await getCoordinates(marker.city);
                      if (coords) {
                         let popupContent = `<div class="card" style="width: 18rem;">
-        ${marker.type === "video" ? 
+        ${marker.type === "video" ?
             (marker.media.includes("youtube.com") || marker.media.includes("youtu.be") ?
                 `<iframe width="100%" height="215" src="https://www.youtube.com/embed/${getYouTubeID(marker.media)}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` :
                 `<video class="card-img-top" controls><source src="${marker.media}" type="video/mp4"></video>`
-            ) : 
+            ) :
             `<img class="card-img-top" src="${marker.media}" alt="Dance Image">`
         }
         <div class="card-body">
             <h5 class="card-title">${marker.genre}</h5>
             <p class="card-text">${marker.city}</p>
             <p class="card-text">${marker.description}</p>
+            <a href="dance_view.php?video_id=${marker.id}">
+                <button type="button">View Dance</button>
+            </a>
          </div>
     </div>`;
     function getYouTubeID(url) {
@@ -175,9 +176,11 @@ async function getCoordinates(city) {
                 }
             })
             .catch(error => console.error("Error loading markers:", error));
-            
+
     </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+<?php
+    include('footer.php');
+    ?>
 </html>

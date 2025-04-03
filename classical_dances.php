@@ -40,8 +40,7 @@ require_once('utility_functions/display_result.php');
         <div class="row">
         <?php
         // Display the dance cards
-        displayDanceCard($result,"");
- 
+        displayDanceCard($result);
             $conn->close();
             ?>
         </div>

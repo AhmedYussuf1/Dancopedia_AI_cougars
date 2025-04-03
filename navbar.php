@@ -16,7 +16,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <!-- link to interactive_map.html -->
-
                 <!-- Home Link -->
                 <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>" href="index.php">Home</a>
@@ -55,11 +54,9 @@
 
                 <!-- Search Bar -->
                 <li class="nav-item search-bar">
-
-                    <input type="text" id="search-bar" class="form-control" placeholder="Search for dances..." onkeyup="searchDances()">
-                    <div id="search-results" class="dropdown-menu"></div>
-                </li>
-					 
+					        <input type="text" id="search-bar" class="form-control" placeholder="Search for dances..." onkeyup="searchDances()">
+					        <div id="search-results" class="dropdown-menu"></div>
+				        </li>
 
                 <?php if (isset($_SESSION['username'])): ?>
                     <li class="nav-item">
@@ -88,41 +85,9 @@
 
 <!-- JavaScript for Search Functionality -->
 <script>
-    function searchDances() {
-        const query = document.getElementById('search-bar').value.trim();
-
-        if (query === "") {
-            // Hide dropdown if search bar is empty
-            document.getElementById('search-results').style.display = 'none';
-            return;
-        }
-
-        fetch(`search.php?query=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                const resultsContainer = document.getElementById('search-results');
-                resultsContainer.innerHTML = ''; // Clear previous results
-
-                if (data.length > 0) {
-                    data.forEach(function(item) {
-                        const div = document.createElement('a');
-                        div.classList.add('dropdown-item'); // Dropdown styling
-                        div.href = "dance_view.php?video_id="+item.dance_id; // Link to the dance page
-                        div.textContent = item.name; // Display dance name
-                        resultsContainer.appendChild(div);
-                    });
-                    resultsContainer.style.display = 'block'; // Show dropdown menu
-                } else {
-                    // Show a "no results found" message in the dropdown
-                    resultsContainer.innerHTML = '<div class="dropdown-item disabled">No results found</div>';
-                    resultsContainer.style.display = 'block';
-                }
-            })
-            .catch(error => console.error('Error fetching search results:', error));
-    }
 function searchDances() {
     const query = document.getElementById('search-bar').value.trim();
-	
+
     if (query === "") {
         // Hide dropdown if search bar is empty
         document.getElementById('search-results').style.display = 'none';
@@ -139,7 +104,7 @@ function searchDances() {
                 data.forEach(function(item) {
                     const div = document.createElement('a');
                     div.classList.add('dropdown-item'); // Dropdown styling
-                    div.href = "dance_view.php?video_id="+item.dance_id; // Link to the dance page
+                    div.href = item.link; // Link to the dance page
                     div.textContent = item.name; // Display dance name
                     resultsContainer.appendChild(div);
                 });
@@ -153,4 +118,3 @@ function searchDances() {
         .catch(error => console.error('Error fetching search results:', error));
 }
 </script>
-

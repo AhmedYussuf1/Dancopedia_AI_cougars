@@ -47,6 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $username, $password_hash, $email, $full_name);
     
     if ($stmt->execute()) {
+        // Close the statement
+        $stmt->close();
+
         $_SESSION['message'] = "Registration successful! Please log in.";
 
         // Create connection again (or reuse the same connection)
@@ -72,23 +75,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Close the statement
-    $stmt->close();
+
 }
 
 // Function to fetch user_id based on user's name
 function getUserIdByName($username, $conn) {
     $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
-    if ($stmt->execute() === false) {
+
+    if (!$stmt->execute()) {
         error_log('execute() failed: ' . htmlspecialchars($stmt->error));
         return false;
     }
-    $stmt->bind_result($user_id);
-    if ($stmt->fetch() === false) {
-        error_log('fetch() failed: ' . htmlspecialchars($stmt->error));
-        return false;
+
+    // Use get_result() to fetch results into an associative array
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc(); // Fetch the single row as an associative array
+        $user_id = $row['user_id'];
+    } else {
+        error_log("No user found with username: $username");
+        $user_id = false;
     }
+
     $stmt->close();
     return $user_id;
 }

@@ -115,6 +115,41 @@ CREATE TABLE `videos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+
+INSERT INTO `password_resets` (`id`, `email`, `token`, `expires`) VALUES
+(1, 'yared1alemu@gmail.com', '69b80aed88a62742da63ecac38f50fd9935b5c8b18370e9ad38c416a2c3e14829abf44167130450998e9196a3ca5a7df584b', 1738821757);
+
+
+
+INSERT INTO `posts` (`id`, `title`, `content`, `created_at`, `user_id`, `image_path`, `image`) VALUES
+(1, 'test', 'test', '2025-02-04 11:57:17', NULL, NULL, NULL),
+(2, 'test', 'test', '2025-02-04 11:57:58', NULL, NULL, NULL),
+(3, 'test', 'test2', '2025-02-04 11:58:34', NULL, NULL, NULL),
+(15, 'chat', 'Chatbot: Dance in America has a rich history that reflects the cultural diversity of the country. From Native American dances to the influence of European settlers, African rhythms, and Latin styles, American dance forms have continually evolved and blended over the centuries. In the early 20th century, American dance was greatly influenced by social dances like the Charleston and the Lindy Hop. The mid-20th century saw the rise of modern dance pioneers such as Martha Graham and Doris Humphrey, who pushed the boundaries of traditional ballet and paved the way for contemporary dance. In recent decades, hip-hop and street dance styles have become prominent in American popular culture, alongside more traditional forms like ballet and tap. The diversity of dance in America continues to thrive, with new forms\r\n\r\n', '2025-02-05 07:07:13', 3, NULL, NULL),
+(19, 'picture', 'test', '2025-02-22 18:54:54', 3, NULL, 'american-flag-2144392_640.png');
+
+
+
+
+
+INSERT INTO `search_history` (`search_id`, `user_id`, `search_query`, `search_timestamp`) VALUES
+(1, 1, 'what is breakdancing?', '2025-02-04 12:01:00');
+
+
+
+INSERT INTO `users` (`user_id`, `username`, `password_hash`, `email`, `full_name`, `role`, `session_token`, `created_at`, `updated_at`) VALUES
+(1, 'test', '$2y$10$Y0QKAhdmUqdLVQKUMemreuqN5Bx3vBo91coWENBaN5IsM2MIue5Ou', 'yared700alemu@gmail.com', 'test1', 'admin', NULL, '2025-02-04 11:05:34', '2025-02-11 04:32:57'),
+(3, 'james', '$2y$10$yyXFFojafDAi/s2FsDTFae/6e2KamopWxQOSdC0nCxvWCXcAiB9JS', '1yared7alemu@gmail.com', 'james', 'admin', NULL, '2025-02-04 07:18:40', '2025-02-04 07:19:29'),
+(10, 'admin', 'password_hash_example', 'admin@example.com', 'Admin User', 'admin', 'dummy_token', '2025-02-05 23:53:12', '2025-02-05 23:53:12'),
+(14, 'john', '$2y$10$Q2T0W6xJ3Sm4KGCtNIXXQejp1qJFgJnNQLEMHsfbxFBiuylwSEN8i', 'johntest1234@yahoo.com', 'john', 'admin', NULL, '2025-02-11 04:34:24', '2025-02-22 19:04:58');
+
+
+
+
+INSERT INTO `user_settings` (`user_id`, `theme`, `email_blog`, `email_events`, `email_dance`, `language`) VALUES
+(3, 2, 0, 0, 0, 'English');
+
+
 INSERT INTO `chatbot_interactions` (`interaction_id`, `user_id`, `query`, `response`, `interaction_timestamp`) VALUES
 (1, NULL, 'hi', 'Sorry, I can only help with questions about dance in America.', '2025-01-31 09:56:19'),
 (2, NULL, 'hi', 'Sorry, I can only help with questions about dance in America.', '2025-01-31 10:43:22'),
@@ -181,38 +216,3 @@ INSERT INTO `feedback` (`id`, `name`, `email`, `message`, `image`, `created_at`)
 (9, 'jame', 'yared1alemu@gmail.com', 'test700', '', '2025-02-20 05:37:45'),
 (10, 'jame', 'yared1alemu@gmail.com', 'test800', '', '2025-02-20 05:38:29');
 
-
-
-
-INSERT INTO `password_resets` (`id`, `email`, `token`, `expires`) VALUES
-(1, 'yared1alemu@gmail.com', '69b80aed88a62742da63ecac38f50fd9935b5c8b18370e9ad38c416a2c3e14829abf44167130450998e9196a3ca5a7df584b', 1738821757);
-
-
-
-INSERT INTO `posts` (`id`, `title`, `content`, `created_at`, `user_id`, `image_path`, `image`) VALUES
-(1, 'test', 'test', '2025-02-04 11:57:17', NULL, NULL, NULL),
-(2, 'test', 'test', '2025-02-04 11:57:58', NULL, NULL, NULL),
-(3, 'test', 'test2', '2025-02-04 11:58:34', NULL, NULL, NULL),
-(15, 'chat', 'Chatbot: Dance in America has a rich history that reflects the cultural diversity of the country. From Native American dances to the influence of European settlers, African rhythms, and Latin styles, American dance forms have continually evolved and blended over the centuries. In the early 20th century, American dance was greatly influenced by social dances like the Charleston and the Lindy Hop. The mid-20th century saw the rise of modern dance pioneers such as Martha Graham and Doris Humphrey, who pushed the boundaries of traditional ballet and paved the way for contemporary dance. In recent decades, hip-hop and street dance styles have become prominent in American popular culture, alongside more traditional forms like ballet and tap. The diversity of dance in America continues to thrive, with new forms\r\n\r\n', '2025-02-05 07:07:13', 3, NULL, NULL),
-(19, 'picture', 'test', '2025-02-22 18:54:54', 3, NULL, 'american-flag-2144392_640.png');
-
-
-
-
-
-INSERT INTO `search_history` (`search_id`, `user_id`, `search_query`, `search_timestamp`) VALUES
-(1, 1, 'what is breakdancing?', '2025-02-04 12:01:00');
-
-
-
-INSERT INTO `users` (`user_id`, `username`, `password_hash`, `email`, `full_name`, `role`, `session_token`, `created_at`, `updated_at`) VALUES
-(1, 'test', '$2y$10$Y0QKAhdmUqdLVQKUMemreuqN5Bx3vBo91coWENBaN5IsM2MIue5Ou', 'yared700alemu@gmail.com', 'test1', 'admin', NULL, '2025-02-04 11:05:34', '2025-02-11 04:32:57'),
-(3, 'james', '$2y$10$yyXFFojafDAi/s2FsDTFae/6e2KamopWxQOSdC0nCxvWCXcAiB9JS', '1yared7alemu@gmail.com', 'james', 'admin', NULL, '2025-02-04 07:18:40', '2025-02-04 07:19:29'),
-(10, 'admin', 'password_hash_example', 'admin@example.com', 'Admin User', 'admin', 'dummy_token', '2025-02-05 23:53:12', '2025-02-05 23:53:12'),
-(14, 'john', '$2y$10$Q2T0W6xJ3Sm4KGCtNIXXQejp1qJFgJnNQLEMHsfbxFBiuylwSEN8i', 'johntest1234@yahoo.com', 'john', 'admin', NULL, '2025-02-11 04:34:24', '2025-02-22 19:04:58');
-
-
-
-
-INSERT INTO `user_settings` (`user_id`, `theme`, `email_blog`, `email_events`, `email_dance`, `language`) VALUES
-(3, 2, 0, 0, 0, 'English');

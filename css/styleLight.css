@@ -181,7 +181,7 @@ footer {
     margin-top: 10px;
     border: 1px solid #ddd;
 }
-
+/* This has effect on the view btn  */
 .btn {
     border-radius: 5px;
     background-color: #4CAF50;

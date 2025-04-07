@@ -25,7 +25,7 @@ function displayDanceCard($result,$defaultVideoURL) {
             echo '            <p class="card-text">Genre: ' . $videoGenre . '</p>';
             echo '            <p class="card-text">Region: ' . $videoRegion . '</p>';
             echo '            <p class="card-text"><strong>Description:</strong> ' . $videoDescription . '</p>'; // Added Description
-            echo '            <a href="dance_view.php?video_id=' . $videoNum . '"><button type="button">View Dance</button></a>'; // Added id for dynamic dance page
+            echo '            <a href="dance_view.php?video_id=' . $videoNum . '"><button type="button" class="btn btn-dark">View Dance</button></a>'; // Added id for dynamic dance page
             echo '        </div>';
             echo '    </div>';
             echo '</div>';

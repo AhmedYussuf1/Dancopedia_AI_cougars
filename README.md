@@ -63,9 +63,9 @@ The project addresses the lack of a centralized, accessible, and engaging platfo
 - **Project Lead:** Jane Doe  
 - **Backend Development:** Corey Klooz
 - **Frontend Development:** Ahmed Yussuf
-- **Database Design:** Tue
-- **UI/UX Design:** Yared
-- **Content Creation:** Mou
+- **Database Design:** Tu Nguyen
+- **UI/UX Design:** Yared Alemu
+- **Content Creation:** Moua Xiong
 - **Testing and QA:** David Lee  
 
 
@@ -95,3 +95,8 @@ Special thanks to the open-source community and contributors for their support a
 ![alt "Screen shots of the interacive map page "](/images_read_me_page/interactive_map.png)
 
 ![alt "Screen shots of the interacive map page "](/images_read_me_page/interactive_map2.png)
+
+
+
+--- 
+testing divider

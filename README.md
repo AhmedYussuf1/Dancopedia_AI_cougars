@@ -95,8 +95,4 @@ Special thanks to the open-source community and contributors for their support a
 ![alt "Screen shots of the interacive map page "](/images_read_me_page/interactive_map.png)
 
 ![alt "Screen shots of the interacive map page "](/images_read_me_page/interactive_map2.png)
-
-
-
---- 
-testing divider
+## divide

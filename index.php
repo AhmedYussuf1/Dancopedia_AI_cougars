@@ -75,7 +75,7 @@ $result = $conn->query($sql);
         </div>
 
         <!-- Video Gallery -->
-        <div class="row">
+        <div class="row" id="video-gallery">
             <?php
             // Default video URL if none is provided
             $defaultVideoURL = 'https://youtu.be/vwGp16NXgQU?si=l8Iv3scmhUbsCGpb'; // Your provided default video URL
@@ -149,11 +149,32 @@ $result = $conn->query($sql);
                 alert('Please type a message!');
             }
         });
+
+        // Filter Dances by Name, Genre, and Region
+        function filterDances() {
+            var nameSearch = $('#search-name').val().toLowerCase();
+            var genreSearch = $('#search-genre').val().toLowerCase();
+            var regionSearch = $('#search-region').val().toLowerCase();
+
+            $('#video-gallery .video-item').each(function() {
+                var name = $(this).data('name');
+                var genre = $(this).data('genre');
+                var region = $(this).data('region');
+
+                if (name.indexOf(nameSearch) > -1 && genre.indexOf(genreSearch) > -1 && region.indexOf(regionSearch) > -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
     </script>
 
     </body>
     </html>
-
+<?php
+include('footer.php');
+?>
 <?php
 $conn->close();
 ?>

@@ -2,8 +2,8 @@
 include('db_connection.php');
 
 // Check if ID is provided and valid
-if (isset($_GET['id'])) {
-    $userId = $_GET['id'];
+if (isset($_POST['id'])) {
+    $userId = $_POST['id'];
 
     // Prepare and execute the delete query
     $stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");

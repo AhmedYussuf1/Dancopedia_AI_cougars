@@ -2,8 +2,8 @@
 include('db_connection.php');
 
 // Check if ID is provided and valid
-if (isset($_GET['id'])) {
-    $danceId = $_GET['id'];
+if (isset($_POST['id'])) {
+    $danceId = $_POST['id'];
 
     // Prepare and execute the delete query
     $stmt = $conn->prepare("DELETE FROM dances WHERE dance_id = ?");

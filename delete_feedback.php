@@ -1,8 +1,8 @@
 <?php
 include('db_connection.php');
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
 
     $stmt = $conn->prepare("DELETE FROM feedback WHERE id = ?");
     $stmt->bind_param("i", $id);

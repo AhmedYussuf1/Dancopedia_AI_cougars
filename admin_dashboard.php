@@ -58,7 +58,11 @@ $usersQuery = $conn->query("SELECT * FROM users");
                         <td><?php echo substr($row['content'], 0, 50); ?>...</td>
                         <td>
                             <a href="edit_post.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_post.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
+                            <form action="delete_post.php" method="POST" style="display:inline;">
+                                <!-- Pass the post ID as a hidden input -->
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -88,7 +92,11 @@ $usersQuery = $conn->query("SELECT * FROM users");
                         <td><?php echo substr($row['description'], 0, 50); ?>...</td>
                         <td>
                             <a href="edit_dance.php?id=<?php echo $row['dance_id']; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_dance.php?id=<?php echo $row['dance_id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this dance?')">Delete</a>
+                            <form action="delete_dance.php" method="POST" style="display:inline;">
+                                <!-- Pass the post ID as a hidden input -->
+                                <input type="hidden" name="id" value="<?php echo $row['dance_id']; ?>">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -116,7 +124,11 @@ $usersQuery = $conn->query("SELECT * FROM users");
                         <td><?php echo $row['role']; ?></td>
                         <td>
                             <a href="edit_user.php?id=<?php echo $row['user_id']; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_user.php?id=<?php echo $row['user_id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                            <form action="delete_user.php" method="POST" style="display:inline;">
+                                <!-- Pass the post ID as a hidden input -->
+                                <input type="hidden" name="id" value="<?php echo $row['user_id']; ?>">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -149,7 +161,11 @@ $usersQuery = $conn->query("SELECT * FROM users");
                     <td><?php echo htmlspecialchars($row['message']); ?></td>
                     <td><?php echo $row['created_at']; ?></td>
                     <td>
-                        <a href="delete_feedback.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this feedback?')">Delete</a>
+                        <form action="delete_feedback.php" method="POST" style="display:inline;">
+                            <!-- Pass the post ID as a hidden input -->
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             <?php } ?>

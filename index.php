@@ -1,4 +1,4 @@
-<?php  
+<?php
 // Start session to track user login status
 session_start();
 //Navbar
@@ -13,24 +13,24 @@ $sql = "SELECT * FROM dances";  // Ensure this matches your table and column nam
 $result = $conn->query($sql);
 ?>
 
-<!-- Add Favicon -->
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Add Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dance USA - Home</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <?php
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dance USA - Home</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- FontAwesome for icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <?php
         include('getTheme.php')
-    ?>
-</head>
-<body>
+        ?>
+    </head>
+    <body>
 
     <!-- Home Page Content -->
     <div class="main-content">
@@ -80,13 +80,13 @@ $result = $conn->query($sql);
             // Default video URL if none is provided
             $defaultVideoURL = 'https://youtu.be/vwGp16NXgQU?si=l8Iv3scmhUbsCGpb'; // Your provided default video URL
 
-           
-           
- 
-        displayDanceCard($result,"");
 
 
-    ?>
+
+            displayDanceCard($result,"");
+
+
+            ?>
         </div>
     </div>
 
@@ -139,7 +139,7 @@ $result = $conn->query($sql);
                     success: function(response) {
                         $('#chat-messages').append('<p><strong>Chatbot:</strong> ' + response + '</p>');
                         $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-                        $("textarea[name='input']").val(''); 
+                        $("textarea[name='input']").val('');
                     },
                     error: function() {
                         $('#chat-messages').append('<p><strong>Chatbot:</strong> Sorry, something went wrong.</p>');
@@ -149,30 +149,10 @@ $result = $conn->query($sql);
                 alert('Please type a message!');
             }
         });
-
-        // Search function
-        /*function searchDances() {
-            let query = document.getElementById('search-bar').value;
-            if (query) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'search.php',  // Create this PHP file to fetch filtered data
-                    data: { search: query },
-                    success: function(response) {
-                        $('#dance-list').html(response);  // Update the dance table
-                    },
-                    error: function() {
-                        alert('Error occurred while searching');
-                    }
-                });
-            } else {
-                alert('Please enter a search query.');
-            }
-        }*/
     </script>
 
-</body>
-</html>
+    </body>
+    </html>
 
 <?php
 $conn->close();

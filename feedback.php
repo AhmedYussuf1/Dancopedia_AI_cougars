@@ -18,7 +18,7 @@ include('db_connection.php');  // Include your database connection
     ?>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <h1 class="text-center">Submit Your Feedback</h1>
         
         <div class="feedback-box">

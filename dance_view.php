@@ -168,5 +168,7 @@ function getGenre($conn){
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
+<?php
+include('footer.php');
+?>
 </html>

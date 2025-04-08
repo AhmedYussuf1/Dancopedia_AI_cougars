@@ -251,10 +251,9 @@ if(isset($_POST['account_delete_button'])) {
 </div>
 <?php }?>
 <div class="container mt-5"><button class="btn btn-danger" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">Delete Account</button></div>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/Simple-Slider-swiper-bundle.min.js"></script>
-<script src="assets/js/Simple-Slider.js"></script>
-
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 

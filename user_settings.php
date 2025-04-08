@@ -196,7 +196,7 @@ if(isset($_POST['account_delete_button'])) {
         </div>
     </div>
 </div>
-<div class="container mt-4 mb-4">
+<div class="container mt-5 mb-4">
     <h1>User Settings</h1>
 </div>
 <form action="user_settings.php" method="POST">

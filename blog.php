@@ -183,7 +183,7 @@ $result = $conn->query($sql);
 <?php include('navbar.php'); ?>
 
 <!-- Blog Content -->
-<div class="container-sm mt-4">
+<div class="container-sm mt-5">
     <h1 class="text-center">Blog</h1>
 
     <!-- Create Blog Section (only for logged-in users) -->

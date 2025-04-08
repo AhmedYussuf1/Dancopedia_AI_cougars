@@ -3,6 +3,8 @@ session_start(); // Start the session to track user login status
 
 // Database connection
 include('db_connection.php');
+// Navbar
+include('navbar.php');
 
 // Check if the user is an admin
 function is_admin($user_id, $conn) {
@@ -178,9 +180,6 @@ $result = $conn->query($sql);
     ?>
 </head>
 <body>
-
-<!-- Navbar -->
-<?php include('navbar.php'); ?>
 
 <!-- Blog Content -->
 <div class="container-sm mt-5">

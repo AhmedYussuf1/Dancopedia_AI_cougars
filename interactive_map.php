@@ -22,34 +22,15 @@ include('navbar.php');
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
-
         #map { 
             width: 98%;
             margin: 20px auto;
             min-height: 700px;
             height: 100%;
-            
         }
-
         .popup-content img, .popup-content video {
             width: 200px; 
             height: auto;
-        }
-        .btn-outline-info{
-            margin-top: 10px;
-            background-color:rgb(46, 133, 146);
-            color: white;
-            width;  2px;
-            border-radius: 15px;
-
-        }
-        .btn-outline-info:hover{
-            background-color:rgb(46, 146, 74);
-            color: white;
-            width;  2px;
-            border-radius: 15px;
-            z-index: 2;
-            s
         }
     </style>
     <!-- Theme CSS -->

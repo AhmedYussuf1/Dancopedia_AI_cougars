@@ -5,6 +5,8 @@ session_start();
 include('navbar.php');
 // Database connection
 include('db_connection.php');
+// Include the function to display dance videos
+require_once('utility_functions/display_result.php');
 
 // Query to get dance data
 $sql = "SELECT * FROM dances";  // Ensure this matches your table and column names
@@ -78,37 +80,13 @@ $result = $conn->query($sql);
             // Default video URL if none is provided
             $defaultVideoURL = 'https://youtu.be/vwGp16NXgQU?si=l8Iv3scmhUbsCGpb'; // Your provided default video URL
 
-            // Fetch dance videos from the database
-            if ($result->num_rows > 0) {
-                // Output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    // Get the video URL, or set to default if empty
-                    $videoURL = !empty($row['video_url']) ? $row['video_url'] : $defaultVideoURL;
-                    $videoName = $row['name']; // Video name
-                    $videoGenre = $row['genre']; // Genre
-                    $videoRegion = $row['region']; // Region
-                    $videoDescription = $row['description']; // Dance description
+           
+           
+ 
+        displayDanceCard($result,"");
 
-                    // Extract YouTube video ID from URL
-                    preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/[^\n\s]+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoURL, $matches);
-                    $videoID = $matches[1]; // YouTube video ID
 
-                    echo '<div class="col-md-4 mb-4">';
-                    echo '    <div class="card">';
-                    echo '        <iframe width="100%" height="215" src="https://www.youtube.com/embed/' . $videoID . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                    echo '        <div class="card-body">';
-                    echo '            <h5 class="card-title">' . $videoName . '</h5>';
-                    echo '            <p class="card-text">Genre: ' . $videoGenre . '</p>';
-                    echo '            <p class="card-text">Region: ' . $videoRegion . '</p>';
-                    echo '            <p class="card-text"><strong>Description:</strong> ' . $videoDescription . '</p>'; // Added Description
-                    echo '        </div>';
-                    echo '    </div>';
-                    echo '</div>';
-                }
-            } else {
-                echo "<p>No videos available.</p>";
-            }
-            ?>
+    ?>
         </div>
     </div>
 

@@ -10,7 +10,8 @@ include('navbar.php');
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dance USA - Home</title>
-    
+   
+ 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
@@ -19,37 +20,18 @@ include('navbar.php');
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/navbar.css">
     <!-- Leaflet CSS & JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
-
         #map { 
             width: 98%;
             margin: 20px auto;
             min-height: 700px;
             height: 100%;
-            
         }
-
         .popup-content img, .popup-content video {
             width: 200px; 
             height: auto;
-        }
-        .btn-outline-info{
-            margin-top: 10px;
-            background-color:rgb(46, 133, 146);
-            color: white;
-            width;  2px;
-            border-radius: 15px;
-
-        }
-        .btn-outline-info:hover{
-            background-color:rgb(46, 146, 74);
-            color: white;
-            width;  2px;
-            border-radius: 15px;
-            z-index: 2;
-            s
         }
     </style>
     <!-- Theme CSS -->
@@ -133,18 +115,23 @@ async function getCoordinates(city) {
     
 }
 
-/************************************************************************************************************
- * The fetch() method is used to request a resource from the network.                                       *
- * It returns a promise that resolves to the Response to that request, whether it is successful or not.     * 
- * You can also opt to return the data in JSON format by calling the json() method on the response.         *
- * The then() method is used to execute a function after the promise is resolved (or rejected).             *       
- * The function receives the response from the fetch request.                                               *             
- * The catch() method is used to handle any errors that may have occurred during the fetch request.         *
- ************************************************************************************************************/
+/**********************************************************************************************************
+ *  Fetch markers from the database and add them to the map with clustering                                *
+*   Fetch markers from the database                                                                        *
+*   The fetch() method is used to request a resource from the network.                                     *                                               
+*   It returns a promise that resolves to the Response to that request, whether it is successful or not.   *
+*    You can also opt to return the data in JSON format by calling the json() method on the response.      *
+*   The then() method is used to execute a function after the promise is resolved (or rejected).           *
+*    The function receives the response from the fetch request.                                            *
+*    The catch() method is used to handle any errors that may have occurred during the fetch request.      *  
+ **********************************************************************************************************/
 
         fetch("get_markers.php")
             .then(response => response.json())
             .then(async data => {
+                 var markers = L.markerClusterGroup({
+                    disableClusteringAtZoom: map.getMaxZoom() // Or a zoom level where you want to see individual markers
+                });
                 for (const marker of data) {
                 let coords = await getCoordinates(marker.city);
                      if (coords) {
@@ -169,16 +156,26 @@ async function getCoordinates(city) {
         let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([\w-]{11})/);
         return match ? match[1] : null;
             }
-      L.marker(coords).addTo(map).bindPopup(popupContent);
+      // Create a regular marker and bind the popup
+      var singleMarker = L.marker(coords).bindPopup(popupContent);
+
+      // Add the single marker to the MarkerClusterGroup
+      markers.addLayer(singleMarker);
                     } else {
                         console.error("Could not find coordinates for:", marker.city);
                     }
                 }
+                // Add the MarkerClusterGroup to the map
+                map.addLayer(markers);
             })
             .catch(error => console.error("Error loading markers:", error));
 
+
     </script>
 </body>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <?php
     include('footer.php');

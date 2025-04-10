@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include('db_connection.php');  // Include your database connection
 
@@ -59,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user_id) {
             // Call the function to insert user settings
             if (insertUserSettings($user_id, $conn)) {
-                echo "User settings added successfully!";
+                error_log("User settings added successfully!");
             } else {
                 error_log("Failed to add user settings.");
             }

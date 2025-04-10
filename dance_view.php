@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('navbar.php');
 // Database connection
 include('db_connection.php');

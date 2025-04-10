@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 // Database connection
 include('db_connection.php');
 

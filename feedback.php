@@ -1,6 +1,4 @@
 <?php
-// Start session to track user login status
-session_start();
 //Navbar
 include 'navbar.php';
 include('db_connection.php');  // Include your database connection

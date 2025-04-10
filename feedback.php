@@ -24,6 +24,11 @@ include('db_connection.php');  // Include your database connection
         <div class="feedback-box">
             <!-- Feedback Form -->
             <form action="submit_feedback.php" method="POST" enctype="multipart/form-data">
+                <label for="feedback_type">Feedback Type:</label>
+                <select name="feedback_type" id="feedback_type" required>
+                    <option value="dance">Dance</option>
+                    <option value="website">Website</option>
+                </select>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>

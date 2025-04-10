@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
+    $feedbackType = $_POST['feedback_type'];
 
     // Handle the image upload if present
     $image = null;
@@ -62,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Prepare the SQL query to insert the feedback into the database
-    $sql = "INSERT INTO feedback (name, email, message, image) 
-            VALUES ('$name', '$email', '$message', '$image')";
+    $sql = "INSERT INTO feedback (name, email, message, image, feedback_type) 
+            VALUES ('$name', '$email', '$message', '$image', '$feedbackType')";
 
     // Execute the query
     if ($conn->query($sql) === TRUE) {

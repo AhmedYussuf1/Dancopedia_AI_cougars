@@ -60,13 +60,12 @@ The project addresses the lack of a centralized, accessible, and engaging platfo
 - For any issues, refer to the documentation or contact the project maintainers.
 
 ## Credits:
-- **Project Lead:** Jane Doe  
-- **Backend Development:** Corey Klooz
-- **Frontend Development:** Ahmed Yussuf
-- **Database Design:** Tu Nguyen
-- **UI/UX Design:** Yared Alemu
-- **Content Creation:** Moua Xiong
-- **Testing and QA:** David Lee  
+- **Project Lead:** Corey Klooz &   Ahmed Yussuf
+- **Backend Development:** Corey Klooz & Yared Alemu
+- **Frontend Development:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
+- **Database Design:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
+- **UI/UX Design:** Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
+ - **Testing and QA:**  The whole team
 
 
 ##ChatGPT Integration:

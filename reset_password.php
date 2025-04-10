@@ -50,7 +50,7 @@ if (isset($token)) {
             $stmt->execute();
 
             $_SESSION['message'] = "Your password has been successfully reset.";
-            header("Location: index.php");  // Redirect to home page
+            header("Location: login.php");  // Redirect to login page
             exit();
         }
     } else {

@@ -18,11 +18,18 @@ include('db_connection.php');  // Include your database connection
     ?>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <h1 class="text-center">Submit Your Feedback</h1>
         
         <div class="feedback-box">
             <!-- Feedback Form -->
+            <label for="feedback_type">Feedback Type:</label>
+<select name="feedback_type" id="feedback_type" required>
+  <option value="dance">Dance</option>
+  <option value="website">Website</option>
+</select>
+
+
             <form action="submit_feedback.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>

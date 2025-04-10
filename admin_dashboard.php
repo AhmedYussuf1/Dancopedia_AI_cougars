@@ -58,7 +58,11 @@ $usersQuery = $conn->query("SELECT * FROM users");
                         <td><?php echo substr($row['content'], 0, 50); ?>...</td>
                         <td>
                             <a href="edit_post.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_post.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
+                            <form action="delete_post.php" method="POST" style="display:inline;">
+                                <!-- Pass the post ID as a hidden input -->
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -88,7 +92,11 @@ $usersQuery = $conn->query("SELECT * FROM users");
                         <td><?php echo substr($row['description'], 0, 50); ?>...</td>
                         <td>
                             <a href="edit_dance.php?id=<?php echo $row['dance_id']; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_dance.php?id=<?php echo $row['dance_id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this dance?')">Delete</a>
+                            <form action="delete_dance.php" method="POST" style="display:inline;">
+                                <!-- Pass the post ID as a hidden input -->
+                                <input type="hidden" name="id" value="<?php echo $row['dance_id']; ?>">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -116,48 +124,92 @@ $usersQuery = $conn->query("SELECT * FROM users");
                         <td><?php echo $row['role']; ?></td>
                         <td>
                             <a href="edit_user.php?id=<?php echo $row['user_id']; ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete_user.php?id=<?php echo $row['user_id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
-        <!-- Feedback Section -->
-        <h2>Feedback</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Feedback ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                    <th>Submitted On</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $feedback_result = mysqli_query($conn, "SELECT * FROM feedback ORDER BY created_at DESC");
-                while ($row = mysqli_fetch_assoc($feedback_result)) { ?>
-                    <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo htmlspecialchars($row['name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['message']); ?></td>
-                        <td><?php echo $row['created_at']; ?></td>
-                        <td>
-                            <form action="delete_feedback.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this feedback?');">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                            <form action="delete_user.php" method="POST" style="display:inline;">
+                                <!-- Pass the post ID as a hidden input -->
+                                <input type="hidden" name="id" value="<?php echo $row['user_id']; ?>">
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
                             </form>
                         </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
+
+        <!-- Website Feedback Section -->
+<h2>Website Feedback</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Feedback ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Submitted On</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    include 'db_connection.php';
+    $website_feedback = mysqli_query($conn, "SELECT * FROM feedback WHERE feedback_type = 'website' ORDER BY created_at DESC");
+
+    while ($row = mysqli_fetch_assoc($website_feedback)) { ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['name']); ?></td>
+            <td><?php echo htmlspecialchars($row['email']); ?></td>
+            <td><?php echo htmlspecialchars($row['message']); ?></td>
+            <td><?php echo $row['created_at']; ?></td>
+            <td>
+                <form action="delete_feedback.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this feedback?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+
+<!-- Dance Feedback Section -->
+<h2>Dance Feedback</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Feedback ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Submitted On</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $dance_feedback = mysqli_query($conn, "SELECT * FROM feedback WHERE feedback_type = 'dance' ORDER BY created_at DESC");
+
+    while ($row = mysqli_fetch_assoc($dance_feedback)) { ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['name']); ?></td>
+            <td><?php echo htmlspecialchars($row['email']); ?></td>
+            <td><?php echo htmlspecialchars($row['message']); ?></td>
+            <td><?php echo $row['created_at']; ?></td>
+            <td>
+                <form action="delete_feedback.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this feedback?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+
     </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script
+
+>

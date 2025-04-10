@@ -1,15 +1,8 @@
 <?php
 session_start(); // Start the session
 
-// Database connection setup
-DEFINE('DATABASE_HOST', 'localhost');
-DEFINE('DATABASE_PORT', 3306);  // MySQL custom port for XAMPP
-DEFINE('DATABASE_DATABASE', 'dance_ai_db');  // Your database name
-DEFINE('DATABASE_USER', 'root');  // Default user for XAMPP
-DEFINE('DATABASE_PASSWORD', '');  // Default password is empty for XAMPP
-
-// Create connection
-$conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE, DATABASE_PORT);
+// Database connection settings
+include('db_connection.php');
 
 // Check connection
 if ($conn->connect_error) {

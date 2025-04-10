@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('db_connection.php');  // Include your database connection
 // Navbar
 include('navbar.php');
@@ -17,7 +18,7 @@ $dancesQuery = $conn->query("SELECT * FROM dances");
 // Fetch users data
 $usersQuery = $conn->query("SELECT * FROM users");
 
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

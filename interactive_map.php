@@ -148,7 +148,7 @@
             <p class="card-text">${marker.city}</p>
             <p class="card-text">${marker.description}</p>
             <a href="dance_view.php?video_id=${marker.id}">
-                <button type="button">View Dance</button>
+                <button class="btn btn-dark" type="button">View Dance</button>
             </a>
          </div>
     </div>`;

@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
+    $feedbackType = $_POST['feedback_type'];
 
     // Handle the image upload if present
     $image = null;
@@ -62,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Prepare the SQL query to insert the feedback into the database
-    $sql = "INSERT INTO feedback (name, email, message, image) 
-            VALUES ('$name', '$email', '$message', '$image')";
+    $sql = "INSERT INTO feedback (name, email, message, image, feedback_type) 
+            VALUES ('$name', '$email', '$message', '$image', '$feedbackType')";
 
     // Execute the query
     if ($conn->query($sql) === TRUE) {
@@ -119,6 +120,11 @@ $conn->close();
         <div class="feedback-box">
             <!-- Feedback Form -->
             <form action="submit_feedback.php" method="POST" enctype="multipart/form-data">
+                <label for="feedback_type">Feedback Type:</label>
+                <select name="feedback_type" id="feedback_type" required>
+                    <option value="dance">Dance</option>
+                    <option value="website">Website</option>
+                </select>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>

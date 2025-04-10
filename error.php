@@ -4,9 +4,6 @@ session_start(); // Start the session
 // Database connection settings
 include('db_connection.php');
 
-// Create connection
-$conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE, DATABASE_PORT);
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

@@ -10,10 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $genre = $_POST['genre'];
     $region = $_POST['region'];
     $description = $_POST['description'];  // Add description field as well
+   
+    // Prepare the query
+    $stmt = $conn->prepare("INSERT INTO dances (name, video_url, genre, region, description, link) VALUES (?, ?, ?, ?, ?, ?)");
 
-    // Prepare and bind the query
-    $stmt = $conn->prepare("INSERT INTO dances (name, video_url, genre, region, description) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $name, $video_url, $genre, $region, $description); // Insert into video_url column
+    // Set link to same value as video_url for now, unless it's a separate field
+    $link = $video_url;
+
+    // Bind parameters: all are strings (s = string)
+    $stmt->bind_param("ssssss", $name, $video_url, $genre, $region, $description, $link);
 
     // Execute the query and check if successful
     if ($stmt->execute()) {

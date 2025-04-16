@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Database connection
 include('db_connection.php');
 // Navbar
@@ -148,6 +149,7 @@ if (isset($_GET['delete']) && isset($_SESSION['user_id'])) {
 // Query to fetch all blog posts to display on the page
 $sql = "SELECT posts.id, posts.title, posts.content, posts.image, users.username, posts.user_id FROM posts JOIN users ON posts.user_id = users.user_id ORDER BY posts.created_at DESC";
 $result = $conn->query($sql);
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

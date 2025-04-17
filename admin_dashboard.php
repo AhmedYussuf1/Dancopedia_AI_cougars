@@ -1,5 +1,5 @@
 <?php
-session_start();
+ob_start();
 include('db_connection.php');  // Include your database connection
 // Navbar
 include('navbar.php');
@@ -18,7 +18,7 @@ $dancesQuery = $conn->query("SELECT * FROM dances");
 // Fetch users data
 $usersQuery = $conn->query("SELECT * FROM users");
 
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +136,7 @@ $usersQuery = $conn->query("SELECT * FROM users");
         </table>
 
         <!-- Feedback Section -->
-        <h2>Feedback</h2>
+        <h2>Website Feedback</h2>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -151,7 +151,44 @@ $usersQuery = $conn->query("SELECT * FROM users");
             <tbody>
             <?php
             include 'db_connection.php';
-            $feedback_result = mysqli_query($conn, "SELECT * FROM feedback ORDER BY created_at DESC");
+            $feedback_result = mysqli_query($conn, "SELECT * FROM feedback WHERE feedback_type = 'website' ORDER BY created_at DESC");
+
+
+            while ($row = mysqli_fetch_assoc($feedback_result)) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['email']); ?></td>
+                    <td><?php echo htmlspecialchars($row['message']); ?></td>
+                    <td><?php echo $row['created_at']; ?></td>
+                    <td>
+                        <form action="delete_feedback.php" method="POST" style="display:inline;">
+                            <!-- Pass the post ID as a hidden input -->
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <h2>Dance Feedback</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Feedback ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Submitted On</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            include 'db_connection.php';
+            $feedback_result = mysqli_query($conn, "SELECT * FROM feedback WHERE feedback_type = 'dance' ORDER BY created_at DESC");
+
 
             while ($row = mysqli_fetch_assoc($feedback_result)) { ?>
                 <tr>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('db_connection.php');  // Include your database connection
 
 // Ensure that the user is logged in and is an admin

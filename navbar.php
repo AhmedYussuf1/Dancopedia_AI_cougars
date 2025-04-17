@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!-- Favicon -->
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 

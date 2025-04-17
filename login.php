@@ -1,6 +1,6 @@
 <?php
-session_start();
-
+ob_start();
+include('navbar.php');
 // Database connection
 include('db_connection.php');
 
@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close the connection
 $conn->close();
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -59,9 +60,6 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-<!-- Include Navbar -->
-<?php include('navbar.php'); ?>
 
 <div class="container">
     <h2 class="my-5 text-center">Login</h2>

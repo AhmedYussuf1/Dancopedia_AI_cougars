@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+ob_start();
 include('db_connection.php');  // Include your database connection
 
 // Handle POST request for registration
@@ -59,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user_id) {
             // Call the function to insert user settings
             if (insertUserSettings($user_id, $conn)) {
-                echo "User settings added successfully!";
+                error_log("User settings added successfully!");
             } else {
                 error_log("Failed to add user settings.");
             }
@@ -122,6 +121,7 @@ function insertUserSettings($user_id, $conn) {
 
 // Close the connection
 $conn->close();
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html lang="en">

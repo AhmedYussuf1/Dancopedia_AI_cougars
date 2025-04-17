@@ -1,6 +1,6 @@
 <?php
-session_start(); // Start the session to track user login status
-
+// Include the navbar (which already contains session_start())
+include('navbar.php');
 // Database connection
 include('db_connection.php');
 
@@ -143,11 +143,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
-
-
-// Include the navbar (which already contains session_start())
-include('navbar.php');
 ?>
 
 <!-- Add Favicon -->

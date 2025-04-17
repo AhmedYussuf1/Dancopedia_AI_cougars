@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <?php
-    session_start();
     require_once 'db_connection.php';
     include('navbar.php');
 

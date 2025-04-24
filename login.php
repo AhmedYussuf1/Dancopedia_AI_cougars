@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Invalid password
             $_SESSION['message'] = "Invalid password!";
-            header("Location: error.php");
+            header("Location: login.php");
             exit();
         }
     } else {
         // No user found with that username
         $_SESSION['message'] = "No user found with that username!";
-        header("Location: error.php");
+        header("Location: login.php");
         exit();
     }
 

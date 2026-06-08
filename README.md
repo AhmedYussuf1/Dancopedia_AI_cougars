@@ -61,8 +61,8 @@ The project addresses the lack of a centralized, accessible, and engaging platfo
 
 ## Credits:
 - **Project Lead:** Corey Klooz &   Ahmed Yussuf
-- **Backend Development:** Corey Klooz & Yared Alemu
-- **Frontend Development:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
+- **Backend Development:** Corey Klooz , Yared Alemu and Ahmed Yussuf
+- **Frontend Development:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz , Yared Alemu and Ahmed Yussuf
 - **Database Design:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
 - **UI/UX Design:** Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
  - **Testing and QA:**  The whole team

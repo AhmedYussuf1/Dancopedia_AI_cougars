@@ -1,89 +1,53 @@
- 
- # Description:
-   **name:** Dancopedia_AI
-   **What the Project Deos:**:
-   
- 
-## Project Description:
-DancopediaAi is a web-based platform designed to provide users with comprehensive information about various dance styles, techniques, and histories. The project aims to serve as an educational resource for dance enthusiasts, students, and professionals. It features an intuitive interface, multimedia content, and a search functionality to explore dance-related topics efficiently. 
-### Problem Statement:
-The project addresses the lack of a centralized, accessible, and engaging platform for learning about diverse dance styles, techniques, and histories. Many existing resources are fragmented or lack depth, making it challenging for dance enthusiasts, students, and professionals to find reliable and comprehensive information. DancopediaAi aims to bridge this gap by providing a user-friendly platform enriched with multimedia content and efficient search capabilities.
+ # Dancopedia AI
 
-## Installation and Usage:
+Dancopedia AI is a web-based educational platform that helps users explore dance styles, histories, techniques, and related multimedia content. The application was built as a team project using PHP, MySQL, CSS, and JavaScript, with features for user accounts, searchable dance content, admin management, feedback handling, and an interactive map.
 
-### Prerequisites:
-- Ensure you have [XAMPP](https://www.apachefriends.org/index.html) installed on your system.
-- Download or clone the project repository to your local machine.
+## Project Purpose
 
-### Installation Steps:
-1. Copy the project folder `DancopediaAi_cougars` to the `htdocs` directory of your XAMPP installation.
-  ```
-  /Applications/XAMPP/xamppfiles/htdocs/DancopediaAi_cougars
-  ```
-2. Start the XAMPP control panel and ensure that both Apache and MySQL services are running.
-3. Open your web browser and navigate to:
-  ```
-  http://localhost/DancopediaAi_cougars
-  ```
-  4. create dabatase named  : 'dance_ai_db' then run the sql script provided or follow step 5.
-  5. Import the database structure and data:
-    - Open phpMyAdmin by navigating to:
-      ```
-      http://localhost/phpmyadmin
-      ```
-    - Select the `dance_ai_db` database.
-    - Click on the "Import" tab.
-    - Choose the SQL file provided in the `database` folder of the project directory (e.g., `dance_ai_db.sql`).
-    - Click "Go" to execute the import.
+Many dance-learning resources are scattered across different websites and are not always easy to search or organize. Dancopedia AI addresses that problem by providing a centralized platform where users can explore dance-related information in a structured and engaging way.
 
-  6. Verify the database setup:
-    - Ensure the tables such as `users`, `dance_styles`, `techniques`, and `histories` are created in the `dance_ai_db` database.
-    - Check that the data has been populated correctly.
+## Key Features
 
-  7. Update the database connection settings:
-    - Open the `config.php` file in the project directory.
-    - Ensure the database credentials match your local setup:
-      ```php
-      define('DB_HOST', 'localhost');
-      define('DB_USER', 'root');
-      define('DB_PASS', '');
-      define('DB_NAME', 'dance_ai_db');
-      ```
-    - Save the changes.
+* User registration, login, logout, password reset, and account management
+* Search functionality for dance styles and related content
+* Admin dashboard for managing users, dance entries, blogs, and feedback
+* CRUD functionality for dance content and blog posts
+* Interactive map for exploring dance-related locations or markers
+* Chatbot feature for dance-style information and recommendations
+* Responsive UI updates using CSS and JavaScript
+* Database-backed content using MySQL
 
-  8. Reload the application in your browser to confirm the setup is complete.
+## Tech Stack
 
-### Usage:
-- Use the search bar on the homepage to explore various dance styles, techniques, and histories.
-- Navigate through the multimedia content to learn more about your favorite dance topics.
-- Enjoy the intuitive interface designed for an engaging learning experience.
-- For any issues, refer to the documentation or contact the project maintainers.
+* PHP
+* MySQL
+* JavaScript
+* CSS
+* XAMPP
+* phpMyAdmin
+* Git/GitHub
 
-## Credits:
-- **Project Lead:** Corey Klooz &   Ahmed Yussuf
-- **Backend Development:** Corey Klooz , Yared Alemu and Ahmed Yussuf
-- **Frontend Development:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz , Yared Alemu and Ahmed Yussuf
-- **Database Design:**  Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
-- **UI/UX Design:** Yared Alemu, Moua Xiong , Tu Nguyen,Corey Klooz & Yared Alemu
- - **Testing and QA:**  The whole team
+## My Contributions
 
+I contributed to front-end and back-end development tasks, including PHP page updates, styling improvements, user-facing functionality, debugging, and team collaboration through Git/GitHub. I also helped improve application flow, content presentation, and issue resolution during development.
 
-##ChatGPT Integration:
-We implemented a ChatGPT-powered chatbot that allows users to request information about specific dance genres. When a user inquires about a dance style, the chatbot provides relevant details. If the user wants to add the suggested dance to the database, they have the option to do so seamlessly. This integration enhances user interaction by offering an intelligent recommendation system while also expanding the database with new dance styles as needed.
-- **User Accounts and Profiles:** Allow users to create accounts, save their favorite dance styles, and track their learning progress.
-- **Interactive Tutorials:** Introduce step-by-step video tutorials for popular dance techniques.
-- **Community Forum:** Add a discussion forum for users to share knowledge, ask questions, and connect with other dance enthusiasts.
-- **Mobile App Integration:** Develop a mobile version of the platform for on-the-go learning.
-- **AI-Powered Recommendations:** Implement AI algorithms to suggest dance styles and content based on user preferences and search history.
-- **Multilingual Support:** Provide content in multiple languages to reach a broader audience.
-- **Live Sessions:** Enable live streaming of dance classes and workshops hosted by professionals.
-- **Gamification:** Add badges, achievements, and leaderboards to make learning more engaging and fun.
-- **Accessibility Features:** Ensure the platform is accessible to users with disabilities by incorporating screen reader support and keyboard navigation.
+## Local Setup
 
-## Feedback and Contributions:
-We welcome feedback and contributions from the community to improve DancopediaAi. If you have suggestions, feature requests, or would like to contribute to the project, please reach out to us via the project's GitHub repository or contact the maintainers directly.
-Special thanks to the open-source community and contributors for their support and resources.  
- 
+1. Install XAMPP.
+2. Clone or download this repository.
+3. Move the project folder into the XAMPP `htdocs` directory.
+4. Start Apache and MySQL from the XAMPP control panel.
+5. Open phpMyAdmin and create a database named `dance_ai_db`.
+6. Import the SQL file from the project’s `database` folder.
+7. Update the database connection file if needed.
+8. Open the project in a browser using:
+
+`http://localhost/DancopediaAi_cougars`
+
+## Team Project Note
+
+This was a collaborative academic project. Contributions were shared across team members, including front-end development, back-end development, database design, UI/UX design, testing, and documentation.
+
   ## Screen shots of the project: 
   **home page:**
 ![alt "Screen shots of the home page "](/images_read_me_page/home.png)
